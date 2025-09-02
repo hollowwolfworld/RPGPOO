@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    public class Player : Entite
+    public class Player : Entity
     {
         public int XP 
             { get; protected set; }

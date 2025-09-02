@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    public abstract class Entite
+    public abstract class Entity
     {
         public int PV { get; protected set; }
         public int Attaque { get; protected set; }
@@ -14,7 +14,7 @@ namespace RPGPOO
         public int Levels { get; protected set; }
         public string Nom { get; protected set;  }
 
-       protected Entite(int pv,int attaque,int defence, int levels,string nom)
+       protected Entity(int pv,int attaque,int defence, int levels,string nom)
         {
             PV = pv;
             Attaque = attaque;
@@ -23,7 +23,7 @@ namespace RPGPOO
             Nom = nom;
         }
 
-        public Entite(string nom)
+        public Entity(string nom)
         {
             Nom = nom;
         }
