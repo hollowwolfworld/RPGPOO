@@ -6,9 +6,20 @@ namespace InventoryEngine
     public class Inventory
     {
         /// <summary>
+        /// Retourne le nombre d'item différent dans l'inventaire
+        /// </summary>
+        public int Size { get { return Items.Count; } }
+
+        /// <summary>
+        /// The maximum number of the same type of item you can have in an inventory
+        /// </summary>
+        public int MaxSlotSize { get; private set; }
+        
+        /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
         /// </summary>
-        public int Size { get; private set; }
+        public int MaxSize { get; private set; }
+
         /// <summary>
         /// Une collection d'Item avec leur quantité
         /// </summary>
@@ -19,9 +30,10 @@ namespace InventoryEngine
         /// </summary>
         /// <param name="size">La taille de l'inventaire</param>
         /// <param name="item">Les items présent par </param>
-        public Inventory(int size, Dictionary<Item, int> items)
+        public Inventory(int size, Dictionary<Item, int> items, int maxSlotSize = 100)
         {
-            Size = size;
+            MaxSlotSize = maxSlotSize;
+            MaxSize = size;
             Items = items;
         }
 
@@ -29,9 +41,10 @@ namespace InventoryEngine
         /// Crée un inventaire vide avec une taille
         /// </summary>
         /// <param name="size">La taille de l'inventaire</param>
-        public Inventory(int size)
+        public Inventory(int size, int maxSlotSize = 100)
         {
-            Size = size;
+            MaxSlotSize = maxSlotSize;
+            MaxSize = size;
             Items = new Dictionary<Item, int>();
         }
 
@@ -40,15 +53,17 @@ namespace InventoryEngine
         /// </summary>
         /// <param name="item">L'objet à ajouter à l'inventaire</param>
         /// <param name="quantity">La quantité de l'objet à ajouter</param>
-        public void AddItem(Item item, int quantity)
+        public void AddItem(Item item, int quantity = 1)
         {
-            if (Items.ContainsKey(item))
+            Item? itemInDictionnary = GetItemByName(item.Name);
+            if (itemInDictionnary != null)
             {
-                Items[item] += quantity;
+                if (Items[itemInDictionnary] == MaxSlotSize) throw new NotEnoughtPlace();
+                Items[itemInDictionnary] += quantity;
                 return;
             }
 
-            if (Items.Count == Size) return;
+            if (Items.Count == Size) throw new NotEnoughtPlace();
 
             Items.Add(item, quantity);
         }
@@ -61,22 +76,23 @@ namespace InventoryEngine
         /// <exception cref="NotEnoughtItem">Si il n'y a pas assez d'item dans l'inventaire pour en retirer cette quantité</exception>
         public void RemoveItem(Item item, int quantity)
         {
-            if (!Items.ContainsKey(item))
+            Item? itemInDictionnary = GetItemByName(item.Name);
+            if (itemInDictionnary == null)
             {
                 throw new ItemNotFound();
             }
 
-            if (quantity > Items[item])
+            if (quantity > Items[itemInDictionnary])
             {
                 throw new NotEnoughtItem();
             }
-            else if (quantity == Items[item])
+            else if (quantity == Items[itemInDictionnary])
             {
-                Items.Remove(item);
+                Items.Remove(itemInDictionnary);
             }
             else
             {
-                Items[item] -= quantity;
+                Items[itemInDictionnary] -= quantity;
             }
         }
 
@@ -104,6 +120,20 @@ namespace InventoryEngine
         public Dictionary<Item, int> GetInventory()
         {
             return Items;
+        }
+
+        /// <summary>
+        /// Récuper l'objet avec son nom
+        /// </summary>
+        /// <param name="name">Le nom de l'objet</param>
+        /// <returns>Retourne null si l'objet n'est pas retrouvez sinon il retourne l'objet</returns>
+        private Item? GetItemByName(string name)
+        {
+            foreach (var keyValuePair in Items)
+            {
+                if (keyValuePair.Key.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) return keyValuePair.Key;
+            }
+            return null;
         }
     }
 }
