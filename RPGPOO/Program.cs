@@ -1,4 +1,4 @@
-﻿namespace RPGPOO
+﻿namespace InventoryEngine
 {
     public class Program
     {

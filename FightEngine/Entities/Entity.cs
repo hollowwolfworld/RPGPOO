@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using InventoryEngine.Skills;
 
-namespace RPGPOO.Entities
+namespace InventoryEngine.Entities
 {
     public abstract class Entity
     {
@@ -15,7 +10,7 @@ namespace RPGPOO.Entities
         public int Levels { get; protected set; }
         public string Name { get; protected set; }
 
-        public Skills skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
        protected Entity(int healthPoint,int attack,int defence, int levels,string name)
         {
@@ -24,11 +19,13 @@ namespace RPGPOO.Entities
             Defence = defence;
             Levels = levels;
             Name = name;
+            Skills = new List<Skill>();
         }
 
         public Entity(string name)
         {
             Name = name;
+            Skills = new List<Skill>();
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO
+namespace InventoryEngine.Skills
 {
-    public class SneakAttack : Skills
+    public class Bite : Skill
     {
     }
 }

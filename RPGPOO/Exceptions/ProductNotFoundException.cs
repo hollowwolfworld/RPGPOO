@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO.Exceptions
+namespace InventoryEngine.Exceptions
 {
     public class ProductNotFoundException: Exception
     {

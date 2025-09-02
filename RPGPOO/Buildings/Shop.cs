@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RPGPOO.Entities.Players;
-using RPGPOO.Exceptions;
+using InventoryEngine.Entities.Players;
+using InventoryEngine.Exceptions;
 
-namespace RPGPOO.Buildings
+namespace InventoryEngine.Buildings
 {
     public class Shop
     {

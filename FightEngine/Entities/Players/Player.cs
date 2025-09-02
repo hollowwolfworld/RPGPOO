@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO.Entities.Players
+namespace InventoryEngine.Entities.Players
 {
     public class Player : Entity
     {
@@ -22,6 +22,7 @@ namespace RPGPOO.Entities.Players
         {
             XP = 0;
             Levels = 1;
+            PlayerInventory = new Inventory(5);
         }
 
 

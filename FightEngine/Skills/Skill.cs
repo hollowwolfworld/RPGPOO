@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO
+namespace InventoryEngine.Skills
 {
-    public class BuffPV : Skills
+    public class Skill
     {
+        public Skill() 
+        {
+
+        }
     }
 }
