@@ -31,7 +31,7 @@ namespace RPGPOO
         /// <summary>
         /// Crée un inventaire vide avec une taille
         /// </summary>
-        /// <param name="taille"></param>
+        /// <param name="taille">La taille de l'inventaire</param>
         public Inventaire(int taille)
         {
             Taille = taille;
