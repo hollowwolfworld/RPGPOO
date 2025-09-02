@@ -1,7 +1,7 @@
 ﻿using FightEngine;
-using FightEngine.Entities;
-using FightEngine.Entities.Enemies;
-using FightEngine.Entities.Players;
+using EntityEngine.Entities;
+using EntityEngine.Entities.Enemies;
+using EntityEngine.Entities.Players;
 
 namespace TestFightEngine
 {
