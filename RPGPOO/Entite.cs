@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal abstract class Entite
+    public abstract class Entite
     {
         public int PV { get; private set; }
         public int Attaque { get; private set; }
