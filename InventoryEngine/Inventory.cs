@@ -45,10 +45,12 @@ namespace InventoryEngine
             if (Items.ContainsKey(item))
             {
                 Items[item] += quantity;
-            } else
-            {
-                Items.Add(item, quantity);
+                return;
             }
+            
+            if (Items.Count == Size) return;
+
+            Items.Add(item, quantity);
         }
 
         /// <summary>
