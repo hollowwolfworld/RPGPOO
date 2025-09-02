@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO
+namespace RPGPOO.Entities
 {
     public class Player : Entity
     {
@@ -20,8 +20,8 @@ namespace RPGPOO
 
         public Player(string name) : base(name) 
         {
-            this.XP = 0;
-            this.Levels = 1;
+            XP = 0;
+            Levels = 1;
         }
 
     }

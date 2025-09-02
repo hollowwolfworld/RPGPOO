@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RPGPOO.Entities;
 using RPGPOO.Exceptions;
 
 namespace RPGPOO
