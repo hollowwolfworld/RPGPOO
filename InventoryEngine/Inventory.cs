@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InventoryEngine.Exceptions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace InventoryEngine
 {
@@ -12,7 +8,7 @@ namespace InventoryEngine
         /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
         /// </summary>
-        public int Size {  get; private set; }
+        public int Size { get; private set; }
         /// <summary>
         /// Une collection d'Item avec leur quantité
         /// </summary>
@@ -46,7 +42,13 @@ namespace InventoryEngine
         /// <param name="quantity">La quantité de l'objet à ajouter</param>
         public void AddItem(Item item, int quantity)
         {
-
+            if (Items.ContainsKey(item))
+            {
+                Items[item] += quantity;
+            } else
+            {
+                Items.Add(item, quantity);
+            }
         }
 
         /// <summary>
@@ -54,9 +56,26 @@ namespace InventoryEngine
         /// </summary>
         /// <param name="item">L'objet à enlever</param>
         /// <param name="quantity">La quantité à enlever</param>
+        /// <exception cref="NotEnoughtItem">Si il n'y a pas assez d'item dans l'inventaire pour en retirer cette quantité</exception>
         public void RemoveItem(Item item, int quantity)
         {
+            if(!Items.ContainsKey(item))
+            {
+                throw new ItemNotFound();
+            }
 
+            if (quantity > Items[item])
+            {
+                throw new NotEnoughtItem();
+            }
+            else if (quantity == Items[item])
+            {
+                Items.Remove(item);
+            }
+            else
+            {
+                Items[item] -= quantity;
+            }
         }
 
         /// <summary>
@@ -66,7 +85,14 @@ namespace InventoryEngine
         /// <returns>La liste des objets trouver contenant ce nom avec leur quantité dans l'inventaire</returns>
         public Dictionary<Item, int> SearchItem(string name)
         {
-            throw new NotImplementedException();
+            Dictionary<Item, int> found = new Dictionary<Item, int>();
+
+            foreach (var keyValuePair in Items)
+            {
+                if (keyValuePair.Key.Name.Contains(name, StringComparison.OrdinalIgnoreCase)) found.Add(keyValuePair.Key, keyValuePair.Value);
+            }
+
+            return found;
         }
 
         /// <summary>
