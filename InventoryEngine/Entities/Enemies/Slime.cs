@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightEngine.Entities.Enemies
+namespace EntityEngine.Entities.Enemies
 {
     public class Slime : Ennemy
     {

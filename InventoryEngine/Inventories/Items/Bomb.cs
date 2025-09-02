@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryEngine.Items
+namespace EntityEngine.Inventories.Items
 {
     public class Bomb : Item
     {

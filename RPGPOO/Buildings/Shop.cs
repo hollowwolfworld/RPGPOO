@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InventoryEngine.Entities.Players;
-using InventoryEngine.Items;
+using EntityEngine.Entities.Players;
+using EntityEngine.Inventories.Items;
 using RPGPOO.Exceptions;
 
 namespace RPGPOO.Buildings

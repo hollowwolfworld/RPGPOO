@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryEngine.Exceptions
+namespace EntityEngine.Exceptions
 {
     public class NotEnoughtItem : Exception
     {

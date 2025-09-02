@@ -1,6 +1,6 @@
 ﻿using FightEngine.Skills;
 
-namespace FightEngine.Entities
+namespace EntityEngine.Entities
 {
     public abstract class Entity
     {

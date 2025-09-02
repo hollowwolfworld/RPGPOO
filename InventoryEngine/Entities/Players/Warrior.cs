@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightEngine.Entities.Players
+namespace EntityEngine.Entities.Players
 {
     public class Warrior : Player
     {

@@ -1,7 +1,7 @@
-﻿using InventoryEngine.Exceptions;
-using InventoryEngine.Items;
+﻿using EntityEngine.Exceptions;
+using EntityEngine.Inventories.Items;
 
-namespace InventoryEngine
+namespace EntityEngine.Inventories
 {
     public class Inventory
     {
