@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace RPGPOO
         /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
         /// </summary>
-        public int Taille {  get; private set; }
+        public int Size {  get; private set; }
         /// <summary>
         /// Une collection d'Item avec leur quantité
         /// </summary>
@@ -20,21 +21,21 @@ namespace RPGPOO
         /// <summary>
         /// Crée un inventaire avec un dictionnaire contenant déjà des items ainsi qu'une taille
         /// </summary>
-        /// <param name="taille">La taille de l'inventaire</param>
+        /// <param name="size">La taille de l'inventaire</param>
         /// <param name="item">Les items présent par </param>
-        public Inventory(int taille, Dictionary<Item, int> items)
+        public Inventory(int size, Dictionary<Item, int> items)
         {
-            Taille = taille;
+            Size = size;
             Items = items;
         }
 
         /// <summary>
         /// Crée un inventaire vide avec une taille
         /// </summary>
-        /// <param name="taille">La taille de l'inventaire</param>
-        public Inventory(int taille)
+        /// <param name="size">La taille de l'inventaire</param>
+        public Inventory(int size)
         {
-            Taille = taille;
+            Size = size;
             Items = new Dictionary<Item, int>();
         }
 
