@@ -4,9 +4,19 @@ namespace RPGPOO.Buildings
 {
     public class Bank
     {
-        public Dictionary<Player, decimal> Accounts;
+        private Dictionary<Player, decimal> Accounts { get; set; }
+        public decimal Tax { get; private set; }
 
-        public Bank() { }
+        public Bank() 
+        {
+            Tax = 0.9m;
+            Accounts = new Dictionary<Player, decimal>();
+        }
+
+        public void Register(Player player)
+        {
+            Accounts.Add(player, 0);
+        }
 
         public void Deposit(Player player, decimal amount)
         {
