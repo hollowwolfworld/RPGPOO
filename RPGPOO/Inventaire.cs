@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    class Inventaire
+    public class Inventaire
     {
         /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
