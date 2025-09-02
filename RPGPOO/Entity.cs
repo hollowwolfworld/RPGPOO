@@ -13,9 +13,9 @@ namespace RPGPOO
         public int Attack { get; protected set; }
         public int Defence { get; protected set; }
         public int Levels { get; protected set; }
-        public string Name { get; protected set;  }
+        public string Name { get; protected set; }
 
-       protected Entity(int healthPoint,int attack,int defence, int levels,string name)
+        protected Entity(int healthPoint,int attack,int defence, int levels,string name)
         {
             HealthPoint = healthPoint;
             Attack = attack;
@@ -28,7 +28,5 @@ namespace RPGPOO
         {
             Name = name;
         }
-
-
     }
 }
