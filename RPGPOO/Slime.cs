@@ -8,7 +8,7 @@ namespace RPGPOO
 {
     internal class Slime : Ennemy
     {
-        protected Slime(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
+        protected Slime(int hp, int attack, int defence, int levels, string name) : base(hp, attack, defence, levels, name)
         {
         }
     }

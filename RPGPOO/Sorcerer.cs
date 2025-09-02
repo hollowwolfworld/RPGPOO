@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Sorcerer : Joueur
+    internal class Sorcerer : Player
     {
-        protected Sorcerer(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP, pv, attaque, defence, levels, nom)
+        protected Sorcerer(int XP, int hp, int attack, int defence, int levels, string name) : base(XP, hp, attack, defence, levels, name)
         {
 
         }
 
-        public Sorcerer(string nom) : base(nom)
+        public Sorcerer(string name) : base(name)
         {
 
         }

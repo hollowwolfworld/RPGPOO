@@ -8,18 +8,18 @@ namespace RPGPOO
 {
     public abstract class Item
     {
-        public string Nom { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
 
-        protected Item(string nom, string description)
+        protected Item(string name, string description)
         {
-            Nom = nom;
+            Name = name;
             Description = description;
         }
 
         public override string ToString()
         {
-            return Nom;
+            return Name;
         }
     }
 }

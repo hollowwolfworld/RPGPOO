@@ -8,7 +8,7 @@ namespace RPGPOO
 {
     internal class Skeleton : Ennemy
     {
-        protected Skeleton(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
+        protected Skeleton(int hp, int attack, int defence, int levels, string name) : base(hp, attack, defence, levels, name)
         {
         }
     }

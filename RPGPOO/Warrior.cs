@@ -8,12 +8,12 @@ namespace RPGPOO
 {
     internal class Warrior : Player
     {
-        protected Warrior(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP ,pv, attaque, defence, levels, nom)
+        protected Warrior(int XP, int hp, int attack, int defence, int levels, string name) : base(XP ,hp, attack, defence, levels, name)
         {
 
         }
 
-        public Warrior (string nom) : base(nom) 
+        public Warrior (string name) : base(name) 
         {
 
         }
