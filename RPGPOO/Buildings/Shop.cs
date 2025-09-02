@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using RPGPOO.Entities.Players;
 using RPGPOO.Exceptions;
 
-namespace RPGPOO
+namespace RPGPOO.Buildings
 {
     public class Shop
     {
@@ -52,7 +52,7 @@ namespace RPGPOO
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui achète l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void BuyArticle(String name, Player player)
+        public void BuyArticle(string name, Player player)
         {
 
         }
@@ -63,7 +63,7 @@ namespace RPGPOO
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui vend l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void SellArticle(String nom, Player player)
+        public void SellArticle(string nom, Player player)
         {
 
         }
@@ -73,7 +73,7 @@ namespace RPGPOO
         /// </summary>
         /// <param name="name">Le nom de l'article</param>
         /// <returns>La liste d'article contenant dans leur nom le nom rechercher</returns>
-        public List<Product> SearchArticle(String name)
+        public List<Product> SearchArticle(string name)
         {
             throw new NotImplementedException();
         }
