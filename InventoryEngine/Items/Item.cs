@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryEngine
+namespace InventoryEngine.Items
 {
     public abstract class Item
     {

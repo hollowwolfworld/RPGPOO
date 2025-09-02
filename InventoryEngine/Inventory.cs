@@ -1,5 +1,5 @@
 ﻿using InventoryEngine.Exceptions;
-using System.Security.Cryptography.X509Certificates;
+using InventoryEngine.Items;
 
 namespace InventoryEngine
 {
@@ -47,7 +47,7 @@ namespace InventoryEngine
                 Items[item] += quantity;
                 return;
             }
-            
+
             if (Items.Count == Size) return;
 
             Items.Add(item, quantity);
@@ -61,7 +61,7 @@ namespace InventoryEngine
         /// <exception cref="NotEnoughtItem">Si il n'y a pas assez d'item dans l'inventaire pour en retirer cette quantité</exception>
         public void RemoveItem(Item item, int quantity)
         {
-            if(!Items.ContainsKey(item))
+            if (!Items.ContainsKey(item))
             {
                 throw new ItemNotFound();
             }
