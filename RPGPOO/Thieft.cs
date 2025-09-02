@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Thieft : Joueur
+    internal class Thieft : Player
     {
         protected Thieft(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP, pv, attaque, defence, levels, nom)
         {

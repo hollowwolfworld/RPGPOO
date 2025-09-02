@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    public class Joueur : Entite
+    public class Player : Entite
     {
         public int XP 
             { get; protected set; }
 
         public Inventaire InventaireDuJoueur;
 
-        protected Joueur(int XP, int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence , levels, nom)
+        protected Player(int XP, int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence , levels, nom)
         {
             this.XP = XP;
             InventaireDuJoueur = new Inventaire(5);
         }
 
-        public Joueur(string nom) : base(nom) 
+        public Player(string nom) : base(nom) 
         {
 
         }
