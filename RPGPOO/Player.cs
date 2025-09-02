@@ -24,5 +24,11 @@ namespace RPGPOO
 
         }
 
+
+        public string Stats()
+        {
+            return "";
+        }
+
     }
 }

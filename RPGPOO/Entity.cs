@@ -15,6 +15,8 @@ namespace RPGPOO
         public int Levels { get; protected set; }
         public string Name { get; protected set;  }
 
+        public Skills skills { get; set; }
+
        protected Entity(int healthPoint,int attack,int defence, int levels,string name)
         {
             HealthPoint = healthPoint;
