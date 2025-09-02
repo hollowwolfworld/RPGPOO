@@ -1,4 +1,4 @@
-﻿using InventoryEngine.Entities.Players;
+﻿using FightEngine.Entities.Players;
 
 namespace RPGPOO.Buildings
 {
