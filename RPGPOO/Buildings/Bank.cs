@@ -1,6 +1,6 @@
 ﻿using InventoryEngine.Entities.Players;
 
-namespace InventoryEngine.Buildings
+namespace RPGPOO.Buildings
 {
     public class Bank
     {
