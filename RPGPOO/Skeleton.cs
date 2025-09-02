@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Wizzard : Ennemies
+    internal class Skeleton : Ennemies
     {
-        protected Wizzard(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
+        protected Skeleton(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
         {
         }
     }
