@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace RPGPOO
 {
     public abstract class Entity
     {
-        public int PV { get; protected set; }
-        public int Attaque { get; protected set; }
+        public int HealthPoint { get; protected set; }
+        public int Attack { get; protected set; }
         public int Defence { get; protected set; }
         public int Levels { get; protected set; }
-        public string Nom { get; protected set;  }
+        public string Name { get; protected set;  }
 
-       protected Entity(int pv,int attaque,int defence, int levels,string nom)
+       protected Entity(int healthPoint,int attack,int defence, int levels,string name)
         {
-            PV = pv;
-            Attaque = attaque;
+            HealthPoint = healthPoint;
+            Attack = attack;
             Defence = defence;
             Levels = levels;
-            Nom = nom;
+            Name = name;
         }
 
-        public Entity(string nom)
+        public Entity(string name)
         {
-            Nom = nom;
+            Name = name;
         }
 
 
