@@ -8,7 +8,14 @@ namespace RPGPOO
 {
     internal class Guerrier : Joueur
     {
-        public Guerrier(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP ,pv, attaque, defence, levels, nom)
-        { }
+        protected Guerrier(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP ,pv, attaque, defence, levels, nom)
+        {
+
+        }
+
+        public Guerrier (string nom) : base(nom) 
+        {
+
+        }
     }
 }

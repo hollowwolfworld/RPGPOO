@@ -13,12 +13,16 @@ namespace RPGPOO
 
         public Inventaire InventaireDuJoueur;
 
-        public Joueur(int XP, int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence , levels, nom)
+        protected Joueur(int XP, int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence , levels, nom)
         {
             this.XP = XP;
             InventaireDuJoueur = new Inventaire(5);
         }
 
+        public Joueur(string nom) : base(nom) 
+        {
+
+        }
 
     }
 }

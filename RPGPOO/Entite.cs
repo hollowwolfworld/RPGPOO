@@ -8,11 +8,11 @@ namespace RPGPOO
 {
     public abstract class Entite
     {
-        public int PV { get; private set; }
-        public int Attaque { get; private set; }
-        public int Defence { get; private set; }
-        public int Levels { get; private set; }
-        public string Nom { get; private set;  }
+        public int PV { get; protected set; }
+        public int Attaque { get; protected set; }
+        public int Defence { get; protected set; }
+        public int Levels { get; protected set; }
+        public string Nom { get; protected set;  }
 
        protected Entite(int pv,int attaque,int defence, int levels,string nom)
         {
@@ -20,6 +20,11 @@ namespace RPGPOO
             Attaque = attaque;
             Defence = defence;
             Levels = levels;
+            Nom = nom;
+        }
+
+        public Entite(string nom)
+        {
             Nom = nom;
         }
 
