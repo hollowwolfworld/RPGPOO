@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Ennemies : Entite
+    internal class Slime : Ennemies
     {
-        protected Ennemies(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels,nom)
+        protected Slime(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
         {
-
         }
     }
 }
