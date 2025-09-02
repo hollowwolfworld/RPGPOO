@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    abstract class Item
+    public abstract class Item
     {
         public string Nom { get; set; }
         public string Description { get; set; }
