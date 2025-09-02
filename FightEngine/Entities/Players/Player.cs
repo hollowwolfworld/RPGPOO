@@ -1,10 +1,11 @@
-﻿using System;
+﻿using InventoryEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryEngine.Entities.Players
+namespace FightEngine.Entities.Players
 {
     public class Player : Entity
     {

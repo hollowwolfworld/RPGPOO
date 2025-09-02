@@ -1,6 +1,6 @@
-﻿using InventoryEngine.Skills;
+﻿using FightEngine.Skills;
 
-namespace InventoryEngine.Entities
+namespace FightEngine.Entities
 {
     public abstract class Entity
     {
@@ -26,6 +26,11 @@ namespace InventoryEngine.Entities
         {
             Name = name;
             Skills = new List<Skill>();
+        }
+
+        public void inflictDamage(int damage)
+        {
+            HealthPoint -= damage;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryEngine.Entities.Enemies
+namespace FightEngine.Entities.Enemies
 {
-    internal class Wolf : Ennemy
+    public class Wolf : Ennemy
     {
         protected Wolf(int hp, int attack, int defence, int levels, string name) : base(hp, attack, defence, levels, name)
         {

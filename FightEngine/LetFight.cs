@@ -11,7 +11,7 @@ namespace FightEngine
     {
         public void InflictDamage(Entity from, Entity to)
         {
-            to.takeDamage(2);
+            to.inflictDamage(2);
         }
     }
 }
