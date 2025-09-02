@@ -11,12 +11,12 @@ namespace RPGPOO
         public int XP 
             { get; protected set; }
 
-        public Inventaire PlayerInventory;
+        public Inventory PlayerInventory;
 
         protected Player(int XP, int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence , levels, nom)
         {
             this.XP = XP;
-            PlayerInventory = new Inventaire(5);
+            PlayerInventory = new Inventory(5);
         }
 
         public Player(string nom) : base(nom) 

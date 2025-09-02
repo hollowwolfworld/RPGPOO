@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    public class Inventaire
+    public class Inventory
     {
         /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
@@ -22,7 +22,7 @@ namespace RPGPOO
         /// </summary>
         /// <param name="taille">La taille de l'inventaire</param>
         /// <param name="item">Les items présent par </param>
-        public Inventaire(int taille, Dictionary<Item, int> items)
+        public Inventory(int taille, Dictionary<Item, int> items)
         {
             Taille = taille;
             Items = items;
@@ -32,7 +32,7 @@ namespace RPGPOO
         /// Crée un inventaire vide avec une taille
         /// </summary>
         /// <param name="taille">La taille de l'inventaire</param>
-        public Inventaire(int taille)
+        public Inventory(int taille)
         {
             Taille = taille;
             Items = new Dictionary<Item, int>();
