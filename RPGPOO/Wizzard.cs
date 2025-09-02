@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Wizzard : Ennemies
+    internal class Wizzard : Ennemy
     {
         protected Wizzard(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
         {

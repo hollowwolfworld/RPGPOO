@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Ennemies : Entity
+    internal class Ennemy : Entity
     {
-        protected Ennemies(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels,nom)
+        protected Ennemy(int hp, int attack, int defence, int levels, string name) : base(hp, attack, defence, levels, name)
         {
 
         }

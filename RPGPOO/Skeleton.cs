@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Skeleton : Ennemies
+    internal class Skeleton : Ennemy
     {
         protected Skeleton(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
         {

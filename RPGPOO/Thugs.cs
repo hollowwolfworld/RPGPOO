@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    internal class Thugs : Ennemies
+    internal class Thugs : Ennemy
     {
         protected Thugs(int pv, int attaque, int defence, int levels, string nom) : base(pv, attaque, defence, levels, nom)
         {
