@@ -12,10 +12,5 @@ namespace EntityEngine.Entities.Players
         {
 
         }
-
-        public Sorcerer(string name) : base(name)
-        {
-
-        }
     }
 }

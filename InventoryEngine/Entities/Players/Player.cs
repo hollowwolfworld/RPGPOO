@@ -1,5 +1,5 @@
 ﻿using EntityEngine.Inventories;
-using InventoryEngine;
+using EntityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,6 @@ namespace EntityEngine.Entities.Players
         protected Player(int XP, int hp, int attack, int defence, int levels, string name) : base(hp, attack, defence , levels, name)
         {
             this.XP = XP;
-            PlayerInventory = new Inventory(5);
-        }
-
-        public Player(string name) : base(name) 
-        {
-            XP = 0;
-            Levels = 1;
             PlayerInventory = new Inventory(5);
         }
 
