@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPGPOO
 {
-    public class Skills
+    public class Rage : Skills
     {
-        public Skills() 
-        {
-
-        }
     }
 }
