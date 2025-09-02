@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RPGPOO.Entities;
 using RPGPOO.Exceptions;
 
 namespace RPGPOO
@@ -30,8 +31,8 @@ namespace RPGPOO
         /// <summary>
         /// Ajoute un article à la boutique
         /// </summary>
-        /// <param name="article">L'article à ajouter</param>
-        public void AddStock(Product article)
+        /// <param name="product">L'article à ajouter</param>
+        public void AddStock(Product product)
         {
             
         }
@@ -42,16 +43,16 @@ namespace RPGPOO
         /// <returns>Stock de la boutique</returns>
         public List<Product> GetStock()
         {
-            return Stock;
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Achat d'un article par le joueur
         /// </summary>
-        /// <param name="nom">Le nom éxacte de l'article</param>
-        /// <param name="joueur">Le joueur qui achète l'article</param>
+        /// <param name="name">Le nom éxacte de l'article</param>
+        /// <param name="player">Le joueur qui achète l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void BuyArticle(String nom, Player joueur)
+        public void BuyArticle(String name, Player player)
         {
 
         }
@@ -59,10 +60,10 @@ namespace RPGPOO
         /// <summary>
         /// Vente d'un article par le joueur
         /// </summary>
-        /// <param name="nom">Le nom éxacte de l'article</param>
-        /// <param name="joueur">Le joueur qui vend l'article</param>
+        /// <param name="name">Le nom éxacte de l'article</param>
+        /// <param name="player">Le joueur qui vend l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void SellArticle(String nom, Player joueur)
+        public void SellArticle(String nom, Player player)
         {
 
         }
@@ -70,9 +71,9 @@ namespace RPGPOO
         /// <summary>
         /// Recherche un article par son nom
         /// </summary>
-        /// <param name="nom">Le nom de l'article</param>
+        /// <param name="name">Le nom de l'article</param>
         /// <returns>La liste d'article contenant dans leur nom le nom rechercher</returns>
-        public List<Product> SearchArticle(String nom)
+        public List<Product> SearchArticle(String name)
         {
             throw new NotImplementedException();
         }

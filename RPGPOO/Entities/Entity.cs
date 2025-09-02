@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace RPGPOO
+namespace RPGPOO.Entities
 {
     public abstract class Entity
     {
@@ -13,7 +13,7 @@ namespace RPGPOO
         public int Attack { get; protected set; }
         public int Defence { get; protected set; }
         public int Levels { get; protected set; }
-        public string Name { get; protected set;  }
+        public string Name { get; protected set; }
 
         public Skills skills { get; set; }
 
@@ -30,7 +30,5 @@ namespace RPGPOO
         {
             Name = name;
         }
-
-
     }
 }

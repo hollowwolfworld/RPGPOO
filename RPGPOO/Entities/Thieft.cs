@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO
+namespace RPGPOO.Entities
 {
     internal class Thieft : Player
     {
-        protected Thieft(int XP, int pv, int attaque, int defence, int levels, string nom) : base(XP, pv, attaque, defence, levels, nom)
+        protected Thieft(int XP, int hp, int attack, int defence, int levels, string name) : base(XP, hp, attack, defence, levels, name)
         {
 
         }
 
-        public Thieft(string nom) : base(nom)
+        public Thieft(string name) : base(name)
         {
 
         }
