@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGPOO.Entities
+namespace RPGPOO.Entities.Enemies
 {
     internal class Wolf : Ennemy
     {
