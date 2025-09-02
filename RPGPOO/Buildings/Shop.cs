@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InventoryEngine.Entities.Players;
+using FightEngine.Entities.Players;
 using InventoryEngine.Exceptions;
 
 namespace InventoryEngine.Buildings

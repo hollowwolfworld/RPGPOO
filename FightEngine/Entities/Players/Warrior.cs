@@ -13,6 +13,8 @@ namespace FightEngine.Entities.Players
 
         }
 
+        public Warrior(int hp, int attack, int defence, string name) : this(0, hp, attack, defence, 1, name) { }
+
         public Warrior (string name) : base(name) 
         {
 
