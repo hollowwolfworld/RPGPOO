@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FightEngine.Entities.Players;
-using InventoryEngine.Exceptions;
+using InventoryEngine.Entities.Players;
+using InventoryEngine.Items;
+using RPGPOO.Exceptions;
 
 namespace RPGPOO.Buildings
 {
