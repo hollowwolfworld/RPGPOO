@@ -9,13 +9,13 @@ namespace RPGPOO
 {
     public class Shop
     {
-        public List<Article> Stock { get; set; }
+        public List<Product> Stock { get; set; }
 
         /// <summary>
         /// Création d'une boutique avec un stock déjà existant
         /// </summary>
         /// <param name="stock"></param>
-        public Shop(List<Article> stock)
+        public Shop(List<Product> stock)
         {
             Stock = stock;
         }
@@ -31,7 +31,7 @@ namespace RPGPOO
         /// Ajoute un article à la boutique
         /// </summary>
         /// <param name="article">L'article à ajouter</param>
-        public void AddStock(Article article)
+        public void AddStock(Product article)
         {
             
         }
@@ -40,7 +40,7 @@ namespace RPGPOO
         /// Retourne le stock de la boutique
         /// </summary>
         /// <returns>Stock de la boutique</returns>
-        public List<Article> GetStock()
+        public List<Product> GetStock()
         {
             return Stock;
         }
@@ -72,7 +72,7 @@ namespace RPGPOO
         /// </summary>
         /// <param name="nom">Le nom de l'article</param>
         /// <returns>La liste d'article contenant dans leur nom le nom rechercher</returns>
-        public List<Article> SearchArticle(String nom)
+        public List<Product> SearchArticle(String nom)
         {
             throw new NotImplementedException();
         }
