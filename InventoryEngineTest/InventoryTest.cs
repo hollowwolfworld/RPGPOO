@@ -1,5 +1,5 @@
-﻿using InventoryEngine;
-using InventoryEngine.Items;
+﻿using EntityEngine.Inventories;
+using EntityEngine.Inventories.Items;
 
 namespace InventoryEngineTest
 {

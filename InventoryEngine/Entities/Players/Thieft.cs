@@ -12,10 +12,5 @@ namespace EntityEngine.Entities.Players
         {
 
         }
-
-        public Thieft(string name) : base(name)
-        {
-
-        }
     }
 }
