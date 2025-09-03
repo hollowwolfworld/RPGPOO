@@ -9,7 +9,7 @@ namespace TestFightEngine
     public sealed class LetFightTest
     {
         [DataTestMethod]
-        [DataRow(10,50,5,6,11)]
+        [DataRow(5,50,12,1,1)]
         [DataRow(7,45,6,3,6)]
         public void InflictDamage(int fromEntityAttack, int toEntityHp, int toEntityDefence, 
             int minDamage, int maxDamage)
