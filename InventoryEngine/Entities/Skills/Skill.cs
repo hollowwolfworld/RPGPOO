@@ -8,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace FightEngine.Skills
 {
-    public class Skill
+    public interface ISkill
     {
-        public Skill() 
-        {
-            
-        }
-
-        public virtual void UseSkill(Entity from, Entity to)
-        {
-            
-        }
+        public void UseSkill(IEntity from, IEntity to);
     }
 }

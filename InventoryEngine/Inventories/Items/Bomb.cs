@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityEngine.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityEngine.Inventories.Items
 {
-    public class Bomb : Item
+    public class Bomb : UsableItem
     {
         public Bomb(string name, string description, int explosionDamage) : base(name, description)
         {
@@ -14,5 +15,10 @@ namespace EntityEngine.Inventories.Items
         }
 
         public int ExplosionDamage { get; private set; }
+
+        public override void Use(IEntity entity)
+        {
+            entity.HealthPoint -= ExplosionDamage;
+        }
     }
 }

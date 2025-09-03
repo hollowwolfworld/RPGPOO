@@ -12,7 +12,7 @@ namespace FightEngine
 {
     public class LetFight
     {
-        public void InflictDamage(Entity from, Entity to)
+        public void InflictDamage(IEntity from, IEntity to)
         {
             double damage = .0;
             int _base = from.Attack - to.Defence/2;
