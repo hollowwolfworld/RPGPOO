@@ -11,6 +11,7 @@ namespace EntityEngine.Entities.Enemies
     {
         private List<ISkill> skills;
         private Dictionary<Status, int> status;
+        private int maxHp;
         private int hp;
         private int attack;
         private int defence;
@@ -19,8 +20,9 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        public Skeleton(int hp, int attack, int defence, int speed, int luck, int levels, string name)
+        public Skeleton(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
+            this.maxHp = maxHp;
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
@@ -42,5 +44,6 @@ namespace EntityEngine.Entities.Enemies
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+        int IEntity.MaxHealthPoint { get => maxHp; set => maxHp = value; }
     }
 }

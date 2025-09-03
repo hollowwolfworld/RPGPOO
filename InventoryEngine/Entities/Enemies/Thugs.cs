@@ -11,6 +11,7 @@ namespace EntityEngine.Entities.Enemies
     {
         private List<ISkill> skills;
         private Dictionary<Status, int> status;
+        private int maxHp;
         private int hp;
         private int attack;
         private int defence;
@@ -19,8 +20,9 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        protected Thugs(int hp, int attack, int defence, int speed, int luck, int levels, string name)
+        protected Thugs(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
+            this.maxHp = maxHp;
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
@@ -32,6 +34,7 @@ namespace EntityEngine.Entities.Enemies
             this.skills = new List<ISkill>();
         }
 
+        public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }

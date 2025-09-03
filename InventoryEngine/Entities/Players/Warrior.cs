@@ -7,9 +7,10 @@ namespace EntityEngine.Entities.Players
     {
         private List<ISkill> skills;
         private Inventory inventory;
-        private Status status;
+        private Dictionary<Status, int> status;
         private int levels;
         private int xp;
+        private int maxHp;
         private int hp;
         private int attack;
         private int defence;
@@ -17,11 +18,12 @@ namespace EntityEngine.Entities.Players
         private string name;
         private int luck;
 
-        public Warrior(int levels, int xp, int hp, int attack, int defence, int speed, int luck, string name)
+        public Warrior(int levels, int xp, int maxHp, int hp, int attack, int defence, int speed, int luck, string name)
         {
             this.levels = levels;
             this.xp = xp;
             this.hp = hp;
+            this.maxHp = maxHp;
             this.attack = attack;
             this.defence = defence;
             this.speed = speed;
@@ -30,6 +32,7 @@ namespace EntityEngine.Entities.Players
             this.name = name;
             this.skills = new List<ISkill>();
             this.inventory = new Inventory(5);
+            status = new Dictionary<Status, int>();
         }
 
         public string Stats()
@@ -59,8 +62,8 @@ namespace EntityEngine.Entities.Players
         int IEntity.Chance { get => luck; set => luck = value; }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
-        Status IEntity.Status { get => status; set => status = value; }
+        Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
-
+        public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
     }
 }
