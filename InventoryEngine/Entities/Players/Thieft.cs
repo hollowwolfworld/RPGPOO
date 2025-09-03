@@ -10,7 +10,7 @@ namespace EntityEngine.Entities.Players
 {
     public class Thieft : IPlayer
     {
-        private List<Skill> skills;
+        private List<ISkill> skills;
         private Inventory inventory;
         private Status status;
         private int levels;
@@ -31,7 +31,7 @@ namespace EntityEngine.Entities.Players
             this.name = name;
             this.luck = luck;
             this.name = name;
-            this.skills = new List<Skill>();
+            this.skills = new List<ISkill>();
             this.inventory = new Inventory(5);
         }
         public string Stats()
@@ -39,7 +39,7 @@ namespace EntityEngine.Entities.Players
             throw new NotImplementedException();
         }
 
-        List<Skill> IEntity.Skills { get => skills; set => skills = value; }
+        List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IPlayer.XP { get => xp; set => xp = value; }
         Inventory IPlayer.PlayerInventory { get => inventory; }
         int IEntity.Attack { get => attack; set => attack = value; }

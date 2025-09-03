@@ -17,6 +17,6 @@ namespace EntityEngine.Entities
         public Status Status { get; set; }
         public int Chance { get; protected set; }
 
-        public List<Skill> Skills { get; set; }
+        public List<ISkill> Skills { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace EntityEngine.Entities.Enemies
 {
     public class Wizzard : IEnnemy, IMagical
     {
-        private List<Skill> skills;
+        private List<ISkill> skills;
         private Status status;
         private int hp;
         private int mp;
@@ -29,10 +29,10 @@ namespace EntityEngine.Entities.Enemies
             this.name = name;
             this.luck = luck;
             this.name = name;
-            this.skills = new List<Skill>();
+            this.skills = new List<ISkill>();
         }
 
-        List<Skill> IEntity.Skills { get => skills; set => skills = value; }
+        List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
         int IEntity.Levels { get => levels; set => levels = value; }
