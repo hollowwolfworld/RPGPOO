@@ -9,26 +9,30 @@ namespace TestFightEngine
     public sealed class LetFightTest
     {
         [DataTestMethod]
-        [DataRow(5,50,12,1,1)]
-        [DataRow(7,45,6,3,6)]
-        public void InflictDamage(int fromEntityAttack, int toEntityHp, int toEntityDefence, 
+        [DataRow(5, 50, 0, 12, 1, 1)]
+        [DataRow(7, 45, 100, 6, 3, 4)]
+        [DataRow(7, 45, 0, 6, 3, 44)]
+        public void InflictDamage(int fromEntityAttack, int toEntityHp, int fromEntityLuck, int toEntityDefence,
             int minDamage, int maxDamage)
         {
+            int maxHp = 40;
             int hp = 40;
+            int maxMp = 10;
             int mp = 10;
             int attack = 12;
             int defence = 12;
+            int speed = 5;
             int luck = 50;
             int level = 1;
             int xp = 0;
 
-            IEntity from = new Slime(hp, mp, fromEntityAttack, defence, luck, level, "Slime");
-            IEntity to = new Warrior(xp, level, toEntityHp, attack, toEntityDefence, luck, "UwU");
+            IEntity from = new Slime(maxHp, hp, maxMp, mp, fromEntityAttack, defence, speed, fromEntityLuck, level, "Slime");
+            IEntity to = new Warrior(xp, level, toEntityHp, toEntityHp, attack, toEntityDefence, speed, luck, "UwU");
 
             LetFight fight = new LetFight();
-            fight.InflictDamage(from, to);
+            DamageCalculator.CalculateDamage(from, to);
 
             Assert.IsTrue(toEntityHp - minDamage >= to.HealthPoint && to.HealthPoint >= toEntityHp - maxDamage);
-
+        }
     }
 }

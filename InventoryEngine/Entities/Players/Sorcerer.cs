@@ -15,19 +15,22 @@ namespace EntityEngine.Entities.Players
         private int xp;
         private List<ISkill> skills;
         private Inventory inventory;
-        private Status status;
+        private Dictionary<Status, int> status;
+        private int maxHp;
         private int hp;
+        private int maxMp;
+        private int mp;
         private int attack;
         private int defence;
         private int speed;
-        private int mp;
         private string name;
         private int luck;
 
-        public Sorcerer(int levels, int xp, int hp, int attack, int defence, int speed, int luck, int mp, string name)
+        public Sorcerer(int levels, int xp, int maxMp, int maxHp, int hp, int attack, int defence, int speed, int luck, int mp, string name)
         {
             this.levels = levels;
             this.xp = xp;
+            this.maxHp = maxHp;
             this.hp = hp;
             this.mp = mp;
             this.attack = attack;
@@ -37,20 +40,15 @@ namespace EntityEngine.Entities.Players
             this.name = name;
             this.skills = new List<ISkill>();
             this.inventory = new Inventory(5);
-            this.status = Status.CLEAR;
-        }
-
-        public Sorcerer(int levels, int xp, string name) : this(levels, xp, 10, 1, 1, 1, new Random().Next(0, 101), 10, name)
-        {
-
-        }
-
-        public Sorcerer(int levels, int xp, int luck, string name) : this(levels, xp, 10, 1, 1, 1, luck, 10, name)
-        {
-
+            this.status = new Dictionary<Status, int>();
         }
 
         public string Stats()
+        {
+            throw new NotImplementedException();
+        }
+
+        string IPlayer.Stats()
         {
             throw new NotImplementedException();
         }
@@ -86,8 +84,10 @@ namespace EntityEngine.Entities.Players
         int IEntity.Chance { get => luck; set => luck = value; }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
-        Status IEntity.Status { get => status; set => status = value; }
+        Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IMagical.ManaPoint { get => mp; set => mp = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+        int IEntity.MaxHealthPoint { get => maxHp; set => maxHp = value; }
+        int IMagical.MaxManaPoint { get => maxMp; set => maxMp = value; }
     }
 }

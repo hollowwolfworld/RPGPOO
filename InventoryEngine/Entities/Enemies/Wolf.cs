@@ -1,18 +1,12 @@
-﻿using EntityEngine.Entities.Players;
-using EntityEngine.Inventories;
-using FightEngine.Skills;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FightEngine.Skills;
 
 namespace EntityEngine.Entities.Enemies
 {
     public class Wolf : IEnnemy
     {
         private List<ISkill> skills;
-        private Status status;
+        private Dictionary<Status, int> status;
+        private int maxHp;
         private int hp;
         private int attack;
         private int defence;
@@ -31,8 +25,10 @@ namespace EntityEngine.Entities.Enemies
             this.luck = luck;
             this.name = name;
             this.skills = new List<ISkill>();
+            this.status = new Dictionary<Status, int>();
         }
 
+        public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -40,7 +36,7 @@ namespace EntityEngine.Entities.Enemies
         int IEntity.Chance { get => luck; set => luck = value; }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
-        Status IEntity.Status { get => status; set => status = value; }
+        Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
     }
 }

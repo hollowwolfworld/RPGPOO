@@ -13,6 +13,7 @@ namespace EntityEngine.Entities.Enemies
         private Dictionary<Status, int> status;
         private int maxHp;
         private int hp;
+        private int maxMp;
         private int mp;
         private int attack;
         private int defence;
@@ -21,10 +22,11 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
         
-        protected Wizzard(int maxHp, int hp, int attack, int defence, int speed, int luck, int mp, int levels, string name)
+        protected Wizzard(int maxHp, int hp, int maxMp, int attack, int defence, int speed, int luck, int mp, int levels, string name)
         {
             this.maxHp = maxHp;
             this.hp = hp;
+            this.maxMp = maxMp;
             this.mp = mp;
             this.attack = attack;
             this.defence = defence;
@@ -37,6 +39,7 @@ namespace EntityEngine.Entities.Enemies
             this.status = new Dictionary<Status, int>();
         }
 
+        public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -47,5 +50,6 @@ namespace EntityEngine.Entities.Enemies
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IMagical.ManaPoint { get => mp; set => mp = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+        int IMagical.MaxManaPoint { get => maxMp; set => maxMp = value; }
     }
 }

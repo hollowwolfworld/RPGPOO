@@ -2,7 +2,9 @@
 using FightEngine.Skills;
 using System;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +14,10 @@ namespace EntityEngine.Entities.Players
     {
         private List<ISkill> skills;
         private Inventory inventory;
-        private Status status;
+        private Dictionary<Status, int> status;
         private int levels;
         private int xp;
+        private int maxHp;
         private int hp;
         private int attack;
         private int defence;
@@ -22,8 +25,9 @@ namespace EntityEngine.Entities.Players
         private string name;
         private int luck;
         
-        public Thieft(int levels, int xp, int hp, int attack, int defence, int speed, int luck, string name)
+        public Thieft(int levels, int xp, int maxHp, int hp, int attack, int defence, int speed, int luck, string name)
         {
+            this.maxHp = maxHp;
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
@@ -37,6 +41,11 @@ namespace EntityEngine.Entities.Players
             this.inventory = new Inventory(5);
         }
         public string Stats()
+        {
+            throw new NotImplementedException();
+        }
+
+        string IPlayer.Stats()
         {
             throw new NotImplementedException();
         }
@@ -63,8 +72,8 @@ namespace EntityEngine.Entities.Players
         int IEntity.Chance { get => luck; set => luck = value; }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
-        Status IEntity.Status { get => status; set => status = value; }
+        Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
-
+        int IEntity.MaxHealthPoint { get => maxHp; set => maxHp = value; }
     }
 }

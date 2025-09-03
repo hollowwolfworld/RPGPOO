@@ -11,7 +11,9 @@ namespace EntityEngine.Entities.Enemies
     {
         private List<ISkill> skills;
         private Dictionary<Status, int> status;
+        private int maxHp;
         private int hp;
+        private int maxMp;
         private int mp;
         private int attack;
         private int defence;
@@ -20,20 +22,23 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        public Slime(int hp, int mp, int attack, int defence, int speed, int luck, int levels, string name)
+        public Slime(int maxHp, int hp, int maxMp, int mp, int attack, int defence, int speed, int luck, int levels, string name)
         {
+            this.maxHp = maxHp;
             this.hp = hp;
+            this.maxMp = maxMp;
+            this.mp = mp;
             this.attack = attack;
             this.defence = defence;
             this.speed = speed;
             this.levels = levels;
             this.name = name;
             this.luck = luck;
-            this.name = name;
             this.skills = new List<ISkill>();
             this.status = new Dictionary<Status, int>();
         }
 
+        public int MaxHealthPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -44,5 +49,6 @@ namespace EntityEngine.Entities.Enemies
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+        int IMagical.MaxManaPoint { get => maxMp; set => maxMp = value; }
     }
 }
