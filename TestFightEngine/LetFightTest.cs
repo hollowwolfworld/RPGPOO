@@ -29,10 +29,9 @@ namespace TestFightEngine
             IEntity from = new Slime(maxHp, hp, maxMp, mp, fromEntityAttack, defence, speed, fromEntityLuck, level, "Slime");
             IEntity to = new Warrior(xp, level, toEntityHp, toEntityHp, attack, toEntityDefence, speed, luck, "UwU");
 
-            Arena fight = new LetFight();
-            fight.InflictDamage(from, to);
+            int damage = DamageCalculator.CalculateDamage(from, to);
 
-            Assert.IsTrue(toEntityHp - minDamage >= to.HealthPoint && to.HealthPoint >= toEntityHp - maxDamage);
+            Assert.IsTrue(damage >= minDamage && damage <= maxDamage);
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     public static class DamageCalculator
     {
+        private static int MaxDamageBoost = 1000; // c'est en poucent (ex: 1000 => 1000% => 10)
+
         /// <summary>
         /// Va prendre l'attaque et la chance du lanceur ainsi que la défence de la cible pour calculer les dégats fait à la cible
         /// </summary>
@@ -28,11 +30,22 @@
             int luck = 10 + chance;
             int luckCrit = rand.Next(0, 101);
 
-            double result = variance * luckCrit <= luck ? Math.Max(1.1, 10 - luck * 0.089) : 1;
+            double result = variance * (luckCrit <= luck ? GetDamageCritMultiplier(Math.Min(100, chance)) : 1);
 
             result = Math.Max(1, Math.Floor(result));
 
             return Convert.ToInt32(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="luck"></param>
+        /// <returns></returns>
+        private static double GetDamageCritMultiplier(int luck)
+        {
+            var result = ((luck * MaxDamageBoost - 100.0 * MaxDamageBoost - 110.0 * luck + 2000.0) / -90.0) + 10.0;
+            return result / 100;
         }
     }
 }
