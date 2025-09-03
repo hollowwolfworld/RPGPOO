@@ -18,8 +18,16 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        public Slime(int hp, int attack, int defence, int levels, string name)
+        public Slime(int hp, int attack, int defence, int luck, int levels, string name)
         {
+            this.hp = hp;
+            this.attack = attack;
+            this.defence = defence;
+            this.levels = levels;
+            this.name = name;
+            this.luck = luck;
+            this.name = name;
+            this.skills = new List<Skill>();
         }
 
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }

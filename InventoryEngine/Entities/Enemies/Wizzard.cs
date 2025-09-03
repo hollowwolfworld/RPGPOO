@@ -19,9 +19,17 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
         
-        protected Wizzard(int hp, int attack, int defence, int manaPoint, int levels, string name)
+        protected Wizzard(int hp, int attack, int defence, int luck, int mp, int levels, string name)
         {
-
+            this.hp = hp;
+            this.mp = mp;
+            this.attack = attack;
+            this.defence = defence;
+            this.levels = levels;
+            this.name = name;
+            this.luck = luck;
+            this.name = name;
+            this.skills = new List<Skill>();
         }
 
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }

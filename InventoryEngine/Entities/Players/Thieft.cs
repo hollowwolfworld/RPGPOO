@@ -10,22 +10,31 @@ namespace EntityEngine.Entities.Players
 {
     public class Thieft : IPlayer
     {
-        protected Thieft(int XP, int hp, int attack, int defence, int levels, string name)
-        {
-
-        }
-
         private List<Skill> skills;
         private Inventory inventory;
         private Status status;
+        private int levels;
         private int xp;
         private int hp;
         private int attack;
         private int defence;
-        private int mp;
-        private int levels;
         private string name;
         private int luck;
+        
+        public Thieft(int levels, int xp, int hp, int attack, int defence, int luck, string name)
+        {
+            this.hp = hp;
+            this.attack = attack;
+            this.defence = defence;
+            this.levels = levels;
+            this.xp = xp;
+            this.name = name;
+            this.luck = luck;
+            this.name = name;
+            this.skills = new List<Skill>();
+            this.inventory = new Inventory(5);
+        }
+
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }
         int IPlayer.XP { get => xp; set => xp = value; }
         Inventory IPlayer.PlayerInventory { get => inventory; }

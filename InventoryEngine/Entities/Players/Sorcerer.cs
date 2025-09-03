@@ -11,22 +11,32 @@ namespace EntityEngine.Entities.Players
 {
     public class Sorcerer : IPlayer, IMagical
     {
-        protected Sorcerer(int xp, int hp, int attack, int defence, int manaPoint, int levels, string name)
-        {
-            
-        }
-
+        private int levels;
+        private int xp;
         private List<Skill> skills;
         private Inventory inventory;
         private Status status;
-        private int xp;
         private int hp;
         private int attack;
         private int defence;
         private int mp;
-        private int levels;
         private string name;
         private int luck;
+
+        public Sorcerer(int levels, int xp, int hp, int attack, int defence, int luck, int mp, string name)
+        {
+            this.levels = levels;
+            this.xp = xp;
+            this.hp = hp;
+            this.mp = mp;
+            this.attack = attack;
+            this.defence = defence;
+            this.name = name;
+            this.luck = luck;
+            this.name = name;
+            this.skills = new List<Skill>();
+            this.inventory = new Inventory(5);
+        }
 
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }
         int IPlayer.XP { get => xp; set => xp = value; }
