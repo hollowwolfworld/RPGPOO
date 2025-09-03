@@ -1,10 +1,5 @@
 ﻿using EntityEngine.Inventories;
 using FightEngine.Skills;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityEngine.Entities.Players
 {
@@ -18,16 +13,18 @@ namespace EntityEngine.Entities.Players
         private int hp;
         private int attack;
         private int defence;
+        private int speed;
         private string name;
         private int luck;
 
-        public Warrior(int levels, int xp, int hp, int attack, int defence, int luck, string name)
+        public Warrior(int levels, int xp, int hp, int attack, int defence, int speed, int luck, string name)
         {
             this.levels = levels;
             this.xp = xp;
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
+            this.speed = speed;
             this.name = name;
             this.luck = luck;
             this.name = name;
@@ -41,7 +38,20 @@ namespace EntityEngine.Entities.Players
         }
 
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
-        int IPlayer.XP { get => xp; set => xp = value; }
+        int IPlayer.XP
+        {
+            get => xp;
+            set
+            {
+                xp = value;
+                int xpNeeded = Convert.ToInt32(Math.Round(50 + 25 * Math.Pow(levels, 1.5)));
+                if (xp >= xpNeeded)
+                {
+                    xp -= xpNeeded;
+                    levels++;
+                }
+            }
+        }
         Inventory IPlayer.PlayerInventory { get => inventory; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -50,6 +60,7 @@ namespace EntityEngine.Entities.Players
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
         Status IEntity.Status { get => status; set => status = value; }
+        int IEntity.Speed { get => speed; set => speed = value; }
 
     }
 }

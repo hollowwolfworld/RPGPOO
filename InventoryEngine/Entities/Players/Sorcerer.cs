@@ -19,11 +19,12 @@ namespace EntityEngine.Entities.Players
         private int hp;
         private int attack;
         private int defence;
+        private int speed;
         private int mp;
         private string name;
         private int luck;
 
-        public Sorcerer(int levels, int xp, int hp, int attack, int defence, int luck, int mp, string name)
+        public Sorcerer(int levels, int xp, int hp, int attack, int defence, int speed, int luck, int mp, string name)
         {
             this.levels = levels;
             this.xp = xp;
@@ -36,6 +37,17 @@ namespace EntityEngine.Entities.Players
             this.name = name;
             this.skills = new List<ISkill>();
             this.inventory = new Inventory(5);
+            this.status = Status.CLEAR;
+        }
+
+        public Sorcerer(int levels, int xp, string name) : this(levels, xp, 10, 1, 1, 1, new Random().Next(0, 101), 10, name)
+        {
+
+        }
+
+        public Sorcerer(int levels, int xp, int luck, string name) : this(levels, xp, 10, 1, 1, 1, luck, 10, name)
+        {
+
         }
 
         public string Stats()
@@ -44,7 +56,29 @@ namespace EntityEngine.Entities.Players
         }
 
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
-        int IPlayer.XP { get => xp; set => xp = value; }
+        int IPlayer.XP 
+        { 
+            get => xp; 
+            set 
+            {
+                xp = value;
+                int xpNeeded = Convert.ToInt32(Math.Round(75 * Math.Pow(levels, 1.5)));
+                if (xp >= xpNeeded)
+                {
+                    Random rand = new Random();
+                    xp -= xpNeeded;
+                    levels++;
+                    hp += rand.Next(8, 13);
+                    attack += rand.Next(3, 5);
+                    defence += rand.Next(2, 4);
+                    speed += 1;
+                    if(rand.Next(0, 100) <= luck)
+                    {
+                        luck += rand.Next(0, 2);
+                    }
+                }
+            } 
+        }
         Inventory IPlayer.PlayerInventory { get => inventory; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -54,5 +88,6 @@ namespace EntityEngine.Entities.Players
         string IEntity.Name { get => name; }
         Status IEntity.Status { get => status; set => status = value; }
         int IMagical.ManaPoint { get => mp; set => mp = value; }
+        int IEntity.Speed { get => speed; set => speed = value; }
     }
 }

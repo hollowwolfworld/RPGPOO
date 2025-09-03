@@ -10,24 +10,27 @@ namespace EntityEngine.Entities.Enemies
     public class Skeleton : IEnnemy
     {
         private List<ISkill> skills;
-        private Status status;
+        private Dictionary<Status, int> status;
         private int hp;
         private int attack;
         private int defence;
+        private int speed;
         private int levels;
         private string name;
         private int luck;
 
-        public Skeleton(int hp, int attack, int defence, int luck, int levels, string name)
+        public Skeleton(int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
+            this.speed = speed;
             this.levels = levels;
             this.name = name;
             this.luck = luck;
             this.name = name;
             this.skills = new List<ISkill>();
+            this.status = new Dictionary<Status, int>();
         }
 
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
@@ -37,6 +40,7 @@ namespace EntityEngine.Entities.Enemies
         int IEntity.Chance { get => luck; set => luck = value; }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
-        Status IEntity.Status { get => status; set => status = value; }
+        Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
+        int IEntity.Speed { get => speed; set => speed = value; }
     }
 }

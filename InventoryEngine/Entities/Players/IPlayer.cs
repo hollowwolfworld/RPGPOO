@@ -9,7 +9,7 @@ namespace EntityEngine.Entities.Players
 {
     public interface IPlayer: IEntity
     {
-        public int XP { get; protected set; }
+        public int XP { get; set; }
         public Inventory PlayerInventory { get; }
 
         public string Stats();
