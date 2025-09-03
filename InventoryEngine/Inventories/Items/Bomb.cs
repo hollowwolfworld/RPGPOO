@@ -18,7 +18,7 @@ namespace EntityEngine.Inventories.Items
 
         public override void Use(IEntity on)
         {
-            on.HealthPoint -= ExplosionDamage;
+            on.HealthPoint -= DamageCalculator.CalculateDamage(ExplosionDamage, on.Chance, 0);
         }
     }
 }
