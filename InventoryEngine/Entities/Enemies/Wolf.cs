@@ -16,11 +16,12 @@ namespace EntityEngine.Entities.Enemies
         private int hp;
         private int attack;
         private int defence;
+        private int speed;
         private int levels;
         private string name;
         private int luck;
 
-        protected Wolf(int hp, int attack, int defence, int luck, int levels, string name)
+        protected Wolf(int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
             this.hp = hp;
             this.attack = attack;
@@ -40,5 +41,6 @@ namespace EntityEngine.Entities.Enemies
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
         Status IEntity.Status { get => status; set => status = value; }
+        int IEntity.Speed { get => speed; set => speed = value; }
     }
 }
