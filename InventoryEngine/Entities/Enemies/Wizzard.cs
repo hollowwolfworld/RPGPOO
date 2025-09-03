@@ -9,17 +9,29 @@ namespace EntityEngine.Entities.Enemies
 {
     public class Wizzard : IEnnemy, IMagical
     {
+        private List<Skill> skills;
+        private Status status;
+        private int hp;
+        private int mp;
+        private int attack;
+        private int defence;
+        private int levels;
+        private string name;
+        private int luck;
+        
         protected Wizzard(int hp, int attack, int defence, int manaPoint, int levels, string name)
         {
+
         }
-        int IEntity.HealthPoint { get; set; }
-        int IEntity.Attack { get; set; }
-        int IEntity.Defence { get; set; }
-        int IEntity.Levels { get; set; }
-        string IEntity.Name { get; set; }
-        Status IEntity.Status { get; set; }
-        int IEntity.Chance { get; set; }
-        List<Skill> IEntity.Skills { get; set; }
-        int IMagical.ManaPoint { get; set; }
+
+        List<Skill> IEntity.Skills { get => skills; set => skills = value; }
+        int IEntity.Attack { get => attack; set => attack = value; }
+        int IEntity.Defence { get => defence; set => defence = value; }
+        int IEntity.Levels { get => levels; set => levels = value; }
+        int IEntity.Chance { get => luck; set => luck = value; }
+        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        string IEntity.Name { get => name; }
+        Status IEntity.Status { get => status; set => status = value; }
+        int IMagical.ManaPoint { get => mp; set => mp = value; }
     }
 }

@@ -17,16 +17,28 @@ namespace EntityEngine.Entities.Players
 
         public Warrior(int hp, int attack, int defence, string name) : this(0, hp, attack, defence, 1, name) { }
 
-        List<Skill> IEntity.Skills { get; set; }
-        int IPlayer.XP { get; set; }
-        Inventory IPlayer.PlayerInventory { get; set; }
-        int IEntity.Attack { get; set; }
-        int IEntity.Defence { get; set; }
-        int IEntity.Levels { get; set; }
-        int IEntity.Chance { get; set; }
-        int IEntity.HealthPoint { get; set; }
-        string IEntity.Name { get; set; }
-        Status IEntity.Status { get; set; }
+        private List<Skill> skills;
+        private Inventory inventory;
+        private Status status;
+        private int xp;
+        private int hp;
+        private int attack;
+        private int defence;
+        private int mp;
+        private int levels;
+        private string name;
+        private int luck;
+
+        List<Skill> IEntity.Skills { get => skills; set => skills = value; }
+        int IPlayer.XP { get => xp; set => xp = value; }
+        Inventory IPlayer.PlayerInventory { get => inventory; }
+        int IEntity.Attack { get => attack; set => attack = value; }
+        int IEntity.Defence { get => defence; set => defence = value; }
+        int IEntity.Levels { get => levels; set => levels = value; }
+        int IEntity.Chance { get => luck; set => luck = value; }
+        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        string IEntity.Name { get => name; }
+        Status IEntity.Status { get => status; set => status = value; }
 
         public string Stats()
         {

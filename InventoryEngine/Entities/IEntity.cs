@@ -13,7 +13,7 @@ namespace EntityEngine.Entities
         public int Attack { get; protected set; }
         public int Defence { get; protected set; }
         public int Levels { get; protected set; }
-        public string Name { get; protected set; }
+        public string Name { get; }
         public Status Status { get; set; }
         public int Chance { get; protected set; }
 
