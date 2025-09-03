@@ -16,9 +16,9 @@ namespace EntityEngine.Inventories.Items
 
         public int ExplosionDamage { get; private set; }
 
-        public override void Use(IEntity entity)
+        public override void Use(IEntity on)
         {
-            entity.HealthPoint -= ExplosionDamage;
+            on.HealthPoint -= ExplosionDamage;
         }
     }
 }
