@@ -38,6 +38,11 @@ namespace EntityEngine.Entities.Players
             this.inventory = new Inventory(5);
         }
 
+        public string Stats()
+        {
+            throw new NotImplementedException();
+        }
+
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }
         int IPlayer.XP { get => xp; set => xp = value; }
         Inventory IPlayer.PlayerInventory { get => inventory; }
@@ -49,10 +54,5 @@ namespace EntityEngine.Entities.Players
         string IEntity.Name { get => name; }
         Status IEntity.Status { get => status; set => status = value; }
         int IMagical.ManaPoint { get => mp; set => mp = value; }
-
-        public string Stats()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

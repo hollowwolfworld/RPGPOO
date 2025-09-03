@@ -34,6 +34,10 @@ namespace EntityEngine.Entities.Players
             this.skills = new List<Skill>();
             this.inventory = new Inventory(5);
         }
+        public string Stats()
+        {
+            throw new NotImplementedException();
+        }
 
         List<Skill> IEntity.Skills { get => skills; set => skills = value; }
         int IPlayer.XP { get => xp; set => xp = value; }
@@ -46,9 +50,5 @@ namespace EntityEngine.Entities.Players
         string IEntity.Name { get => name; }
         Status IEntity.Status { get => status; set => status = value; }
 
-        public string Stats()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
