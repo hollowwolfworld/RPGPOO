@@ -13,6 +13,10 @@ namespace FightEngine.Skills
         public void UseSkill(IEntity from, IEntity to)
         {
             if(from is not IMagical mage) throw new NotAllowedToUseSkill();
+
+            int damage = DamageCalculator.CalculateDamage(7, from.Chance, to.Defence);
+            to.HealthPoint -= damage;
+            //TODO status
         }
     }
 }
