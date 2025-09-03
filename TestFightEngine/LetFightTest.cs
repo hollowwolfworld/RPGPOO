@@ -14,8 +14,8 @@ namespace TestFightEngine
         public void InflictDamage(int fromEntityAttack, int toEntityHp, int toEntityDefence, 
             int minDamage, int maxDamage)
         {
-            Entity from = new Slime(40,fromEntityAttack, 12, 1, "Slime");
-            Entity to = new Warrior(toEntityHp, 12, toEntityDefence, "UwU");
+            IEntity from = new Slime(40,fromEntityAttack, 12, 1, "Slime");
+            IEntity to = new Warrior(toEntityHp, 12, toEntityDefence, "UwU");
 
             LetFight fight = new LetFight();
             fight.InflictDamage(from, to);

@@ -13,6 +13,6 @@ namespace EntityEngine.Inventories.Items
         {
         }
 
-        public abstract void Use(Entity entity);
+        public abstract void Use(IEntity entity);
     }
 }

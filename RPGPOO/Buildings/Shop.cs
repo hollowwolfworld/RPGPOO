@@ -53,7 +53,7 @@ namespace RPGPOO.Buildings
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui achète l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void BuyArticle(string name, Player player)
+        public void BuyArticle(string name, IPlayer player)
         {
 
         }
@@ -64,7 +64,7 @@ namespace RPGPOO.Buildings
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui vend l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void SellArticle(string nom, Player player)
+        public void SellArticle(string nom, IPlayer player)
         {
 
         }

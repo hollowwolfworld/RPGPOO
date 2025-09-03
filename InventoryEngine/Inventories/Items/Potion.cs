@@ -18,7 +18,7 @@ namespace EntityEngine.Inventories.Items
 
         public int RestoreHealth { get; private set; }
 
-        public override void Use(Entity entity)
+        public override void Use(IEntity entity)
         {
             throw new NotImplementedException();
         }

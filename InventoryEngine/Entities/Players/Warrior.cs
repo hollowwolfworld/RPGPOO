@@ -10,7 +10,7 @@ namespace EntityEngine.Entities.Players
 {
     public class Warrior : IPlayer
     {
-        protected Warrior(int XP, int hp, int attack, int defence, int levels, string name) : base(XP ,hp, attack, defence, levels, name)
+        protected Warrior(int XP, int hp, int attack, int defence, int levels, string name)
         {
 
         }

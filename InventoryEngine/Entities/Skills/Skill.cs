@@ -15,7 +15,7 @@ namespace FightEngine.Skills
             
         }
 
-        public virtual void UseSkill(Entity from, Entity to)
+        public virtual void UseSkill(IEntity from, IEntity to)
         {
             
         }
