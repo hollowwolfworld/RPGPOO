@@ -1,4 +1,6 @@
-﻿using FightEngine.Skills;
+﻿using EntityEngine.Entities.Enemies;
+using EntityEngine.Exceptions;
+using FightEngine.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,12 @@ namespace EntityEngine.Entities.Skills
     {
         public void UseSkill(IEntity from, IEntity to)
         {
-            throw new NotImplementedException();
+            if (from is not Slime) throw new NotAllowedToUseSkill();
+
+            int drain = 5 + from.Levels / 2;
+
+            from.HealthPoint += drain;
+            to.HealthPoint -= drain;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace EntityEngine.Entities
         BURN,
         PARALYSED,
         POISONED,
+        RAGE,
         CLEAR
     }
 }

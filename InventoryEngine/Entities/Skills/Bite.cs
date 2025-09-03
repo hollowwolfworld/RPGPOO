@@ -1,4 +1,7 @@
 ﻿using EntityEngine.Entities;
+using EntityEngine.Entities.Enemies;
+using EntityEngine.Entities.Players;
+using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,23 @@ namespace FightEngine.Skills
     {
         public void UseSkill(IEntity from, IEntity to)
         {
-            throw new NotImplementedException();
+            double damage = DamageCalculator.CalculateDamage(from, to);
+
+            if (from is not Wolf) throw new NotAllowedToUseSkill();
+
+            if (to is Warrior)
+            {
+                damage *= 0.5;
+
+                damage = Math.Max(1, Math.Floor(damage));
+            } else if (to is Sorcerer)
+            {
+                damage *= 1.5;
+
+                damage = Math.Max(1, Math.Floor(damage));
+            }
+
+            to.HealthPoint -= Convert.ToInt32(damage);
         }
     }
 }
