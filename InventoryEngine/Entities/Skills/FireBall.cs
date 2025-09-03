@@ -16,7 +16,8 @@ namespace FightEngine.Skills
 
             int damage = DamageCalculator.CalculateDamage(7, from.Chance, to.Defence);
             to.HealthPoint -= damage;
-            //TODO status
+            to.Status[Status.BURN] = 2;
+            mage.ManaPoint -= 3;//a equilibrer 
         }
     }
 }

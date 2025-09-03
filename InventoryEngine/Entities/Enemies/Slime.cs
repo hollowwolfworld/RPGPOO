@@ -38,7 +38,7 @@ namespace EntityEngine.Entities.Enemies
             this.status = new Dictionary<Status, int>();
         }
 
-        public int MaxHealthPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
