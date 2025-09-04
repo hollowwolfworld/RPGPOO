@@ -16,7 +16,7 @@ namespace EntityEngine.Entities.Players
         {
             List<ISkill> skills = new List<ISkill>();
             var entitiesSkillsLevels = EntityLevelupSkill.EntitiesSkill;
-            var entities = EntityLevelupSkill.EntitiesSkill.Keys.ToList().FindAll((key) => key.GetType() == entity.GetType());
+            var entities = EntityLevelupSkill.EntitiesSkill.Keys.ToList().FindAll((key) => key == entity.GetType().ToString());
 
             foreach (var ent in entities)
             {
