@@ -8,6 +8,7 @@ namespace EntityEngine.Entities
 {
     public interface IMagical
     {
+        public int MaxManaPoint { get; protected set; }
         public int ManaPoint { get; set; }
     }
 }

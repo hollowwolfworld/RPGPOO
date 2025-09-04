@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityEngine.Entities.Players
+namespace EntityEngine.Entities
 {
-    public interface IPlayer: IEntity, IHumanoid
+    public interface IHumanoid
     {
-        public int XP { get; set; }
+        public Inventory Inventory { get; }
+        public int Gold { get; set; }
     }
 }
