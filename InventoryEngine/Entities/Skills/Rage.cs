@@ -11,18 +11,11 @@ namespace FightEngine.Skills
 {
     public class Rage : ISkill
     {
-        public int Boost { get; private set; }
-
-        public Rage(int boost)
-        {
-            Boost = boost;
-        }
-
         public void UseSkill(IEntity from, IEntity to)
         {
             if (from is not Warrior) throw new NotAllowedToUseSkill();
 
-            from.Status[Status.RAGE] = 2;
+            from.Status[Status.RAGE] = 3;
         }
     }
 }

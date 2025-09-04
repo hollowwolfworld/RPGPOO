@@ -11,9 +11,12 @@ namespace FightEngine
         Arena Arena { get; set; }
         int CptTours { get; set; }
 
+        
+
         public FightTurns(IEntity fighter1, IEntity fighter2)
         {
             Arena = new Arena(fighter1, fighter2);
+            CptTours = 0;
         }
 
         /// <summary>
@@ -77,7 +80,10 @@ namespace FightEngine
                 {
                     case Status.RAGE:
                         Arena.FirstFighter.Status[status.Key] = status.Value - 1;
-                        //if status turn == 0 remove status 
+                        if (status.Value == 0)
+                        {
+                           
+                        } 
                         break;
                     case Status.BURN:
                         //if status turn == 0 remove status
@@ -134,5 +140,11 @@ namespace FightEngine
 
             return 0;
         }
+
+        private void RemovedStatue(IEntity entity)
+        {
+            entity.Status.Clear();
+        }
     }
+
 }
