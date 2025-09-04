@@ -12,21 +12,21 @@ namespace EntityEngine.Entities.Skills
 {
     public class EntityLevelupSkill
     {
-        private Dictionary<IEntity, List<SkillLevel>> entitiesSkills;
+        private Dictionary<string, List<SkillLevel>> entitiesSkills;
 
         public EntityLevelupSkill()
         {
-            entitiesSkills = new Dictionary<IEntity, List<SkillLevel>>
+            entitiesSkills = new Dictionary<string, List<SkillLevel>>
             {
                 {
-                    new Warrior(0, 0, 0, 0, 0, 0, 0, 0, "warrior"),
+                    typeof(Warrior).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel(1, new Rage())
                     }
                 },
                 {
-                    new Sorcerer("sorcerer"),
+                    typeof(Sorcerer).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel(1, new FireBall()),
@@ -35,42 +35,42 @@ namespace EntityEngine.Entities.Skills
                     }
                 },
                 {
-                    new Thieft(0, 0, 0, 0, 0, 0, 0, 0, "thieft"),
+                    typeof(Thieft).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel (1, new SneakAttack()),
                     }
                 },
                 {
-                    new Skeleton(0, 0, 0, 0, 0, 0, 0, "skeleton"),
+                    typeof(Skeleton).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel(1, new ShootAnArrow()),
                     }
                 },
                 {
-                    new Wolf(0, 0, 0, 0, 0, 0, "wolf"),
+                    typeof(Wolf).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel(1, new Bite())
                     }
                 },
                 {
-                    new Slime(0, 0, 0, 0, 0, 0, 0, 0, 0, "slime"),
+                    typeof(Slime).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel(1, new DrainPV())
                     }
                 },
                 {
-                    new Thugs(0, 0, 0, 0, 0, 0, 0, "thugs"),
+                    typeof(Thugs).ToString(),
                     new List<SkillLevel>()
                     {
 
                     }
                 },
                 {
-                    new Wizzard(0, 0, 0, 0, 0, 0, 0, 0, 0, "wizzard"),
+                    typeof(Wizzard).ToString(),
                     new List<SkillLevel>()
                     {
                         new SkillLevel (1, new Heal()),
@@ -81,6 +81,6 @@ namespace EntityEngine.Entities.Skills
             };
         }
 
-        public ReadOnlyDictionary<IEntity, List<SkillLevel>> EntitiesSkill { get => new ReadOnlyDictionary<IEntity, List<SkillLevel>>(entitiesSkills); }
+        public ReadOnlyDictionary<string, List<SkillLevel>> EntitiesSkill { get => new ReadOnlyDictionary<string, List<SkillLevel>>(entitiesSkills); }
     }
 }

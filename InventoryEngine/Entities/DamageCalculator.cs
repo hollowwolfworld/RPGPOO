@@ -1,4 +1,6 @@
-﻿namespace EntityEngine.Entities
+﻿using FightEngine.Skills;
+
+namespace EntityEngine.Entities
 {
     public static class DamageCalculator
     {
@@ -12,7 +14,12 @@
         /// <returns>Les dégat en point de vie infligé à la cible</returns>
         public static int CalculateDamage(IEntity from, IEntity to)
         {
-            return CalculateDamage(from.Attack, from.Chance, to.Defence);
+            var rageBoost = 1.0;
+            if(from.Status.ContainsKey(Status.RAGE))
+            {
+                rageBoost = 1.5;
+            }
+            return CalculateDamage(Convert.ToInt32(Math.Round(from.Attack * rageBoost)), from.Chance, to.Defence);
         }
 
         /// <summary>

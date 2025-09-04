@@ -33,8 +33,27 @@ namespace EntityEngine.Entities.Enemies
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
         int IEntity.Levels { get => levels; set => levels = value; }
-        int IEntity.Chance { get => luck; set => luck = value; }
-        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        int IEntity.Chance
+        {
+            get => luck;
+            set
+            {
+                if (value < 0) return;
+                if (value > 100)
+                {
+                    luck = 100;
+                    return;
+                }
+                luck = value;
+            }
+        }
+        int IEntity.HealthPoint { get => hp;
+            set
+            {
+                if (value <= maxHp) hp = value;
+                else hp = maxHp;
+            }
+        }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }

@@ -46,7 +46,7 @@ namespace FightEngine
         {
             if (!VerifyEntity(striker) && !VerifyEntity(targer)) throw new Exception();
             if (striker is not IPlayer player) throw new Exception();
-            if (player.PlayerInventory[item] == -1) throw new Exception();
+            if (player.Inventory[item] == -1) throw new Exception();
             if (item is not UsableItem usableItem) throw new Exception();
 
             usableItem.Use(targer);
