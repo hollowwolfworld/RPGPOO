@@ -89,7 +89,7 @@ namespace EntityEngine.Entities.Enemies
             private int defence = 6;
             private int speed = 6;
             private int luck = 5;
-            private int gold = 0;
+            private int gold = 12;
             private Dictionary<Status, int> status = new Dictionary<Status, int>();
             private List<ISkill> skills = LevelManager.GetSkillsForLevel(1, typeof(Thugs));
             private Inventory inventory = new Inventory(5);
