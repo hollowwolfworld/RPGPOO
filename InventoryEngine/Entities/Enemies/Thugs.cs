@@ -20,7 +20,7 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        protected Thugs(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name)
+        public Thugs(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
             this.maxHp = maxHp;
             this.hp = hp;
@@ -44,5 +44,10 @@ namespace EntityEngine.Entities.Enemies
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+
+        public Move ChooseMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

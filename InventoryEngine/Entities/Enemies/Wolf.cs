@@ -15,7 +15,7 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        protected Wolf(int hp, int attack, int defence, int speed, int luck, int levels, string name)
+        public Wolf(int hp, int attack, int defence, int speed, int luck, int levels, string name)
         {
             this.hp = hp;
             this.attack = attack;
@@ -38,5 +38,10 @@ namespace EntityEngine.Entities.Enemies
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
+
+        public Move ChooseMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

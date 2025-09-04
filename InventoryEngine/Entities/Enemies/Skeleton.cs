@@ -45,5 +45,10 @@ namespace EntityEngine.Entities.Enemies
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
         int IEntity.MaxHealthPoint { get => maxHp; set => maxHp = value; }
+
+        public Move ChooseMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

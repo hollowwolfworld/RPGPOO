@@ -45,7 +45,7 @@
         private static double GetDamageCritMultiplier(int luck)
         {
             var result = ((luck * MaxDamageBoost - 100.0 * MaxDamageBoost - 110.0 * luck + 2000.0) / -90.0) + 10.0;
-            return result / 100;
+            return Math.Min(MaxDamageBoost, result) / 100;
         }
     }
 }

@@ -26,6 +26,24 @@ namespace EntityEngine.Entities.Players
         private string name;
         private int luck;
 
+        public Sorcerer(int levels, int xp, List<ISkill> skills, Inventory inventory, Dictionary<Status, int> status, int maxHp, int hp, int maxMp, int mp, int attack, int defence, int speed, string name, int luck)
+        {
+            this.levels = levels;
+            this.xp = xp;
+            this.skills = skills;
+            this.inventory = inventory;
+            this.status = status;
+            this.maxHp = maxHp;
+            this.hp = hp;
+            this.maxMp = maxMp;
+            this.mp = mp;
+            this.attack = attack;
+            this.defence = defence;
+            this.speed = speed;
+            this.name = name;
+            this.luck = luck;
+        }
+
         public Sorcerer(int levels, int xp, int maxMp, int maxHp, int hp, int attack, int defence, int speed, int luck, int mp, string name)
         {
             this.levels = levels;
@@ -43,9 +61,9 @@ namespace EntityEngine.Entities.Players
             this.status = new Dictionary<Status, int>();
         }
 
-        public string Stats()
+        public Sorcerer(string name)
         {
-            throw new NotImplementedException();
+            this.name = name;
         }
 
         string IPlayer.Stats()
@@ -60,10 +78,10 @@ namespace EntityEngine.Entities.Players
             set 
             {
                 xp = value;
-                int xpNeeded = Convert.ToInt32(Math.Round(75 * Math.Pow(levels, 1.5)));
+                int xpNeeded = LevelManager.XPNeeded(levels);
                 if (xp >= xpNeeded)
                 {
-                    Random rand = new Random();
+                    Random rand = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray()));
                     xp -= xpNeeded;
                     levels++;
                     hp += rand.Next(8, 13);
@@ -74,6 +92,7 @@ namespace EntityEngine.Entities.Players
                     {
                         luck += rand.Next(0, 2);
                     }
+                    skills = LevelManager.GetSkillsForLevel(levels, this);
                 }
             } 
         }

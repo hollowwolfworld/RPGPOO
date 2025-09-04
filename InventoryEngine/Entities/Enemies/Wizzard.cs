@@ -22,7 +22,7 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
         
-        protected Wizzard(int maxHp, int hp, int maxMp, int attack, int defence, int speed, int luck, int mp, int levels, string name)
+        public Wizzard(int maxHp, int hp, int maxMp, int attack, int defence, int speed, int luck, int mp, int levels, string name)
         {
             this.maxHp = maxHp;
             this.hp = hp;
@@ -51,5 +51,10 @@ namespace EntityEngine.Entities.Enemies
         int IMagical.ManaPoint { get => mp; set => mp = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
         int IMagical.MaxManaPoint { get => maxMp; set => maxMp = value; }
+        
+        public Move ChooseMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
