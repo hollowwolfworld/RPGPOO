@@ -14,8 +14,11 @@ namespace EntityEngine.Entities.Skills
         public void UseSkill(IEntity from, IEntity to)
         {
             if (from is not Thugs) throw new NotAllowedToUseSkill();
+            if (to is not IHumanoid victim) throw new Exception();
 
-            //DamageCalculator.CalculateDamage(); //to do scale sur l'argent
+            int damage = from.Attack * victim.Gold / 100 ;
+
+            DamageCalculator.CalculateDamage(damage,from.Chance,to.Defence);
         }
     }
 }
