@@ -16,7 +16,7 @@ namespace EntityEngine.Entities
         public int Attack { get; protected set; }
         public int Defence { get; protected set; }
         public int Speed { get; protected set; }
-        public int Chance { get; protected set; }
+        public int Luck { get; protected set; }
         public Dictionary<Status, int> Status { get; protected set; }
         public List<ISkill> Skills { get; set; }
     }

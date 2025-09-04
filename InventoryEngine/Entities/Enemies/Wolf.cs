@@ -35,7 +35,7 @@ namespace EntityEngine.Entities.Enemies
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
         int IEntity.Levels { get => levels; set => levels = value; }
-        int IEntity.Chance
+        int IEntity.Luck
         {
             get => luck;
             set
