@@ -90,6 +90,6 @@ namespace EntityEngine.Entities.Players
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
         public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
-        public int Gold { get => gold; set => gold; }
+        public int Gold { get => gold; set => gold = value; }
     }
 }

@@ -15,7 +15,7 @@ namespace EntityEngine.Entities.Skills
         {
             if (from is not Thugs) throw new NotAllowedToUseSkill();
 
-            DamageCalculator.CalculateDamage(from.) //to do scale sur l'argent
+            //DamageCalculator.CalculateDamage(from.) //to do scale sur l'argent
         }
     }
 }
