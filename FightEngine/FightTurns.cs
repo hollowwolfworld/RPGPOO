@@ -91,12 +91,20 @@ namespace FightEngine
                         {
                             RemovedStatus(Arena.FirstFighter, status.Key);
                         }
-                        break;
+                        else
+                        {
+                            ApplyStatusDamage(Arena.FirstFighter, status.Key);
+                        }
+                            break;
                     case Status.POISONED:
                         Arena.FirstFighter.Status[status.Key] = status.Value - 1;
                         if (status.Value == 0)
                         {
                             RemovedStatus(Arena.FirstFighter, status.Key);
+                        }
+                        else
+                        {
+                            ApplyStatusDamage(Arena.FirstFighter, status.Key);
                         }
                         break;
                 }
@@ -112,12 +120,17 @@ namespace FightEngine
                         {
                             RemovedStatus(Arena.SecondFighter, status.Key);
                         }
-                        break;
+                        
+                            break;
                     case Status.BURN:
                         Arena.SecondFighter.Status[status.Key] = status.Value - 1;
                         if (status.Value == 0)
                         {
                             RemovedStatus(Arena.SecondFighter, status.Key);
+                        }
+                        else
+                        {
+                            ApplyStatusDamage(Arena.SecondFighter, status.Key);
                         }
                         break;
                     case Status.POISONED:
@@ -125,6 +138,10 @@ namespace FightEngine
                         if (status.Value == 0)
                         {
                             RemovedStatus(Arena.SecondFighter, status.Key);
+                        }
+                        else
+                        {
+                            ApplyStatusDamage(Arena.SecondFighter, status.Key);
                         }
                         break;
                 }
@@ -180,6 +197,18 @@ namespace FightEngine
         private void RemovedStatus(IEntity entity, Status status)
         {
             entity.Status.Remove(status);
+        }
+
+        private void ApplyStatusDamage(IEntity entity, Status? status)
+        {
+            int hurt = 7 * entity.MaxHealthPoint / 100;
+            if (status is not null)
+            {
+
+                entity.HealthPoint =- hurt;
+            }
+
+            
         }
     }
 
