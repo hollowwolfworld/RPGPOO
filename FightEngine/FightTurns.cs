@@ -37,7 +37,7 @@ namespace FightEngine
 
                     if (nameLaterWithBetterName < 0) return -1;
                 }
-                if(!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED))
+                if(!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED) && Arena.SecondFighter.HealthPoint > 0)
                 {
                     var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
 
@@ -53,7 +53,7 @@ namespace FightEngine
 
                     if (nameLaterWithBetterName < 0) return -1;
                 }
-                if (!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED))
+                if (!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED) && Arena.FirstFighter.HealthPoint > 0)
                 {
                     var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
 
@@ -82,14 +82,50 @@ namespace FightEngine
                         Arena.FirstFighter.Status[status.Key] = status.Value - 1;
                         if (status.Value == 0)
                         {
-                           
+                            RemovedStatus(Arena.FirstFighter, status.Key);
                         } 
                         break;
                     case Status.BURN:
-                        //if status turn == 0 remove status
+                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(Arena.FirstFighter, status.Key);
+                        }
                         break;
                     case Status.POISONED:
-                        //if status turn == 0 remove status
+                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(Arena.FirstFighter, status.Key);
+                        }
+                        break;
+                }
+            }
+
+            foreach (var status in Arena.SecondFighter.Status)
+            {
+                switch (status.Key)
+                {
+                    case Status.RAGE:
+                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(Arena.SecondFighter, status.Key);
+                        }
+                        break;
+                    case Status.BURN:
+                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(Arena.SecondFighter, status.Key);
+                        }
+                        break;
+                    case Status.POISONED:
+                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(Arena.SecondFighter, status.Key);
+                        }
                         break;
                 }
             }
@@ -141,9 +177,9 @@ namespace FightEngine
             return 0;
         }
 
-        private void RemovedStatue(IEntity entity)
+        private void RemovedStatus(IEntity entity, Status status)
         {
-            entity.Status.Clear();
+            entity.Status.Remove(status);
         }
     }
 
