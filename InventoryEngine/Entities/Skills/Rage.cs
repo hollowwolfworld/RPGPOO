@@ -1,4 +1,6 @@
 ﻿using EntityEngine.Entities;
+using EntityEngine.Entities.Players;
+using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,9 @@ namespace FightEngine.Skills
     {
         public void UseSkill(IEntity from, IEntity to)
         {
-            throw new NotImplementedException();
+            if (from is not Warrior) throw new NotAllowedToUseSkill();
+
+            from.Status[Status.RAGE] = 3;
         }
     }
 }

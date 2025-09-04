@@ -8,5 +8,6 @@ namespace EntityEngine.Entities.Enemies
 {
     public interface IEnnemy : IEntity
     {
+        public Move ChooseMove();
     }
 }

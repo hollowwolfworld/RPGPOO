@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityEngine.Entities
+namespace TestFightEngine
 {
-    public enum Status
+    public class TestFightTurn
     {
-        BURN,
-        PARALYSED,
-        POISONED,
-        RAGE,
+
     }
 }

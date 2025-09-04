@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace FightEngine.Skills
 {
-    public class ShootAnArrow : ISkill
+    public class Heal : ISkill
     {
+        
         public void UseSkill(IEntity from, IEntity to)
         {
-            if(from is not Skeleton) throw new NotAllowedToUseSkill();
-            DamageCalculator.CalculateDamage(from, to);
-            to.Status[Status.POISONED] = 3;
+            if (from is not IMagical magical) throw new NotAllowedToUseSkill();
+
+            from.HealthPoint += 10 + from.Levels / 2;
+            magical.ManaPoint -= 5;
         }
     }
 }

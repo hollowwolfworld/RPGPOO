@@ -1,4 +1,5 @@
 ﻿using EntityEngine.Entities;
+using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace EntityEngine.Inventories.Items
         }
         public int RestoreMana { get; private set; }
 
-        public override void Use(IEntity entity)
+        public override void Use(IEntity on)
         {
-            
+            if (on is not IMagical magical) throw new NotAMagicalEntity();
+            magical.ManaPoint += RestoreMana;
         }
     }
 }
