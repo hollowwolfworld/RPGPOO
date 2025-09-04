@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace FightEngine.Skills
 {
-    public class BuffPV : ISkill
+    public class Heal : ISkill
     {
         
         public void UseSkill(IEntity from, IEntity to)
         {
-            if (from is not IMagical) throw new NotAllowedToUseSkill();
+            if (from is not IMagical magical) throw new NotAllowedToUseSkill();
 
             from.HealthPoint += 10 + from.Levels / 2;
+            magical.ManaPoint -= 5;
         }
     }
 }
