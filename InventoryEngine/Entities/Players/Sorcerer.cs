@@ -84,10 +84,12 @@ namespace EntityEngine.Entities.Players
                     Random rand = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray()));
                     xp -= xpNeeded;
                     levels++;
-                    hp += rand.Next(8, 13);
-                    attack += rand.Next(3, 5);
-                    defence += rand.Next(2, 4);
-                    speed += 1;
+                    maxHp += rand.Next(4, 7);
+                    attack += rand.Next(0, 2);
+                    defence += rand.Next(0, 2);
+                    maxMp += rand.Next(3, 5);
+                    speed += rand.Next(1,3);
+
                     if(rand.Next(0, 100) <= luck)
                     {
                         luck += rand.Next(0, 2);
@@ -100,7 +102,20 @@ namespace EntityEngine.Entities.Players
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
         int IEntity.Levels { get => levels; set => levels = value; }
-        int IEntity.Chance { get => luck; set => luck = value; }
+        int IEntity.Chance
+        {
+            get => luck;
+            set
+            {
+                if (value < 0) return;
+                if (value > 100)
+                {
+                    luck = 100;
+                    return;
+                }
+                luck = value;
+            }
+        }
         int IEntity.HealthPoint { get => hp; set => hp = value; }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
