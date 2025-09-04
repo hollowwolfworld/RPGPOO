@@ -31,7 +31,7 @@ namespace EntityEngine.Entities.Skills
                     {
                         new SkillLevel(1, new FireBall()),
                         new SkillLevel(1, new Paralisy()),
-                        new SkillLevel(1, new BuffPV()),
+                        new SkillLevel(1, new Heal()),
                     }
                 },
                 {
@@ -73,7 +73,7 @@ namespace EntityEngine.Entities.Skills
                     new Wizzard(0, 0, 0, 0, 0, 0, 0, 0, 0, "wizzard"),
                     new List<SkillLevel>()
                     {
-                        new SkillLevel (1, new BuffPV()),
+                        new SkillLevel (1, new Heal()),
                         new SkillLevel (1, new FireBall()),
                         new SkillLevel (1, new Paralisy()),
                     }

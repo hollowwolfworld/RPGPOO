@@ -1,15 +1,8 @@
 ﻿using EntityEngine;
 using EntityEngine.Entities;
-using EntityEngine.Entities.Enemies;
 using EntityEngine.Inventories.Items;
 using FightEngine.Skills;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.Design;
 
 namespace FightEngine
 {
@@ -29,103 +22,71 @@ namespace FightEngine
         /// <param name="">Le move choisit par fighter1</param>
         /// <param name="">Le move choisit par fighter2</param>
         /// <return>-1 si le fighter1 à perdu, 1 si figther 2 à perdu, 0 si le combat n'est pas fini</return>
-        public int Turn(MoveAction moveF1, MoveAction moveF2) 
+        public int Turn(MoveAction moveF1, MoveAction moveF2)
         {
-            do
-            {
+            // si P1 est plus rapide que P2 alors il commncera a attaquer en premier
+            // utilisation d'une option de combat
             if (Arena.FirstFighter.Speed >= Arena.SecondFighter.Speed)
-                // si P1 est plus rapide que P2 alors il commncera a attaquer en premier
-                // utilisation d'une option de combat
             {
-                if (moveF1.Move is ISkill skill)
+                if(!Arena.FirstFighter.Status.ContainsKey(Status.PARALYSED))
                 {
-                    Arena.UseSkill(Arena.FirstFighter, moveF1.Target, skill);
-                }
-                else if (moveF1.Move is Item item) 
-                {
-                    Arena.UseItems(Arena.FirstFighter, moveF1.Target, item);
-                }
-                else if (moveF1.Move is SimpleMove)
-                {
-                    Arena.Hit(Arena.FirstFighter, moveF1.Target);
-                }
+                    var nameLaterWithBetterName = MakeMove(Arena.FirstFighter, moveF1);
 
-
-                else if (moveF1.Move is Flee flee)
+                    if (nameLaterWithBetterName < 0) return -1;
+                }
+                if(!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED))
                 {
-                        if (Arena.FirstFighter.Speed > Arena.SecondFighter.Speed)
-                        {
+                    var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
 
-                        }
+                    if (nameLaterWithBetterName < 0) { return 1; }
                 }
-                    // quiter la boucle si un joueur tomber a 0 pv
-                    if (Arena.SecondFighter.HealthPoint <= 0 || Arena.FirstFighter.HealthPoint <= 0)
-                    {
-                        break;
-                    }
-
-                //utilisation d'une option de combat
-
-                if (moveF2.Move is ISkill skill2)
-                {
-                    Arena.UseSkill(Arena.FirstFighter, moveF2.Target, skill2);
-                }
-                else if (moveF2.Move is Item item2)
-                {
-                    Arena.UseItems(Arena.FirstFighter, moveF2.Target, item2);
-                }
-                else if (moveF2.Move is SimpleMove)
-                {
-                    Arena.Hit(Arena.FirstFighter, moveF2.Target);
-                }
-                    // quiter la boucle si un joueur tomber a 0 pv
-                    if (Arena.SecondFighter.HealthPoint <= 0 || Arena.FirstFighter.HealthPoint <= 0)
-                    {
-                        break;
-                    }
-                }
-            else
+            }
             // si P2 est plus rapide que P1 alors il commncera a attaquer en premier
+            else
             {
-                if (moveF2.Move is ISkill skill2)
+                if (!Arena.FirstFighter.Status.ContainsKey(Status.PARALYSED))
                 {
-                    Arena.UseSkill(Arena.FirstFighter, moveF2.Target, skill2);
-                }
-                else if (moveF2.Move is Item item2)
-                {
-                    Arena.UseItems(Arena.FirstFighter, moveF2.Target, item2);
-                }
-                else if (moveF2.Move is SimpleMove)
-                {
-                    Arena.Hit(Arena.FirstFighter, moveF2.Target);
-                }
-                    // quiter la boucle si un joueur tomber a 0 pv
-                    if (Arena.SecondFighter.HealthPoint <= 0 || Arena.FirstFighter.HealthPoint <= 0)
-                    {
-                        break;
-                    }
-                    //utilisation d'une option de combat
+                    var nameLaterWithBetterName = MakeMove(Arena.FirstFighter, moveF1);
 
-                    if (moveF1.Move is ISkill skill)
-                {
-                    Arena.UseSkill(Arena.FirstFighter, moveF1.Target, skill);
+                    if (nameLaterWithBetterName < 0) return -1;
                 }
-                else if (moveF1.Move is Item item)
+                if (!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED))
                 {
-                    Arena.UseItems(Arena.FirstFighter, moveF1.Target, item);
+                    var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
+
+                    if (nameLaterWithBetterName < 0) { return 1; }
                 }
-                else if (moveF1.Move is SimpleMove)
+                //utilisation d'une option de combat
+            }
+
+            //Appliquez les status
+            foreach (var status in Arena.FirstFighter.Status)
+            {
+                switch(status.Key)
                 {
-                    Arena.Hit(Arena.FirstFighter, moveF1.Target);
-                }
-                    // quiter la boucle si un joueur tomber a 0 pv
-                    if (Arena.SecondFighter.HealthPoint <= 0 || Arena.FirstFighter.HealthPoint <= 0)
-                    {
+                    case Status.BURN:
                         break;
-                    }
-                    //utilisation d'une option de combat
+                    case Status.POISONED:
+                        break;
                 }
-            } while (Arena.FirstFighter.HealthPoint > 0 && Arena.SecondFighter.HealthPoint > 0);
+            }
+
+            foreach (var status in Arena.FirstFighter.Status)
+            {
+                switch (status.Key)
+                {
+                    case Status.RAGE:
+                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
+                        //if status turn == 0 remove status 
+                        break;
+                    case Status.BURN:
+                        //if status turn == 0 remove status
+                        break;
+                    case Status.POISONED:
+                        //if status turn == 0 remove status
+                        break;
+                }
+            }
 
             //retours d'une valeur celon le resultat du combat
             if (Arena.FirstFighter.HealthPoint <= 0)
@@ -136,11 +97,42 @@ namespace FightEngine
             {
                 return 1;
             }
-            if (Arena.FirstFighter.HealthPoint > 0 && Arena.SecondFighter.HealthPoint > 0)
+
+            CptTours++;
+
+            return 0;
+        }
+
+        private int MakeMove(IEntity user, MoveAction move)
+        {
+            switch (move.Move)
             {
-                return 0;
+                case ISkill skill:
+                    Arena.UseSkill(user, move.Target, skill!);
+                    break;
+                case UsableItem item:
+                    Arena.UseItems(user, move.Target, item);
+                    break;
+                case SimpleMove:
+                    Arena.Hit(user, move.Target);
+                    break;
+                case Flee flee:
+                    if (user.Speed > flee.Opponent.Speed)
+                    {
+                        return -1;
+                    }
+
+                    Random rand = new Random();
+                    int luckFlee = rand.Next(1, 101);
+
+                    if (luckFlee <= Arena.FirstFighter.Chance)
+                    {
+                        return -1;
+                    }
+                    break;
             }
-            throw new NotImplementedException();
+
+            return 0;
         }
     }
 }

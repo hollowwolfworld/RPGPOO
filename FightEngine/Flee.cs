@@ -1,4 +1,5 @@
 ﻿using EntityEngine;
+using EntityEngine.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,11 @@ namespace FightEngine
 {
     public class Flee : Move
     {
+        public IEntity Opponent { get; set; }
+
+        public Flee(IEntity opponent)
+        {
+            this.Opponent = opponent;
+        }
     }
 }
