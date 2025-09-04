@@ -1,4 +1,5 @@
-﻿using FightEngine.Skills;
+﻿using EntityEngine.Inventories;
+using FightEngine.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntityEngine.Entities.Enemies
 {
-    public class Thugs : IEnnemy
+    public class Thugs : IEnnemy, IHumanoid
     {
         private List<ISkill> skills;
         private Dictionary<Status, int> status;
@@ -19,8 +20,10 @@ namespace EntityEngine.Entities.Enemies
         private int levels;
         private string name;
         private int luck;
+        private int gold;
+        private Inventory inventory;
 
-        public Thugs(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name)
+        public Thugs(int maxHp, int hp, int attack, int defence, int speed, int luck, int levels, string name, int gold)
         {
             this.maxHp = maxHp;
             this.hp = hp;
@@ -31,10 +34,16 @@ namespace EntityEngine.Entities.Enemies
             this.name = name;
             this.luck = luck;
             this.name = name;
+            this.gold = gold;
+            this.inventory = new Inventory(5);
             this.skills = new List<ISkill>();
         }
 
         public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
+
+        public Inventory Inventory => inventory;
+
+        public int Gold { get => gold; set => gold = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -53,7 +62,13 @@ namespace EntityEngine.Entities.Enemies
                 luck = value;
             }
         }
-        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        int IEntity.HealthPoint { get => hp;
+            set
+            {
+                if (value <= maxHp) hp = value;
+                else hp = maxHp;
+            }
+        }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }

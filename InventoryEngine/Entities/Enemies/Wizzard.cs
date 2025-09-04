@@ -1,4 +1,5 @@
-﻿using FightEngine.Skills;
+﻿using EntityEngine.Inventories;
+using FightEngine.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EntityEngine.Entities.Enemies
 {
-    public class Wizzard : IEnnemy, IMagical
+    public class Wizzard : IEnnemy, IMagical, IHumanoid
     {
         private List<ISkill> skills;
         private Dictionary<Status, int> status;
@@ -21,8 +22,10 @@ namespace EntityEngine.Entities.Enemies
         private int levels;
         private string name;
         private int luck;
+        private int gold;
+        private Inventory inventory;
         
-        public Wizzard(int maxHp, int hp, int maxMp, int attack, int defence, int speed, int luck, int mp, int levels, string name)
+        public Wizzard(int maxHp, int hp, int maxMp, int attack, int defence, int speed, int luck, int mp, int levels, int gold, string name)
         {
             this.maxHp = maxHp;
             this.hp = hp;
@@ -37,9 +40,14 @@ namespace EntityEngine.Entities.Enemies
             this.name = name;
             this.skills = new List<ISkill>();
             this.status = new Dictionary<Status, int>();
+            this.inventory = new Inventory(5);
         }
 
         public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
+
+        public Inventory Inventory { get => inventory; }
+
+        public int Gold { get => gold; set => gold = value; }
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
@@ -58,10 +66,24 @@ namespace EntityEngine.Entities.Enemies
                 luck = value;
             }
         }
-        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        int IEntity.HealthPoint { get => hp;
+            set
+            {
+                if (value <= maxHp) hp = value;
+                else hp = maxHp;
+            }
+        }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
-        int IMagical.ManaPoint { get => mp; set => mp = value; }
+        int IMagical.ManaPoint
+        {
+            get => mp;
+            set
+            {
+                if (value <= maxMp) hp = value;
+                else hp = maxMp;
+            }
+        }
         int IEntity.Speed { get => speed; set => speed = value; }
         int IMagical.MaxManaPoint { get => maxMp; set => maxMp = value; }
         

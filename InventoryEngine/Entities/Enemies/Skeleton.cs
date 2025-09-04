@@ -53,7 +53,13 @@ namespace EntityEngine.Entities.Enemies
                 luck = value;
             }
         }
-        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        int IEntity.HealthPoint { get => hp; 
+            set 
+            {
+                if (value <= maxHp) hp = value;
+                else hp = maxHp;
+            } 
+        }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }

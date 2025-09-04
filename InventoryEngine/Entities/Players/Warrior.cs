@@ -17,6 +17,7 @@ namespace EntityEngine.Entities.Players
         private int speed;
         private string name;
         private int luck;
+        private int gold;
 
         public Warrior(int levels, int xp, int maxHp, int hp, int attack, int defence, int speed, int luck, string name)
         {
@@ -30,14 +31,10 @@ namespace EntityEngine.Entities.Players
             this.name = name;
             this.luck = luck;
             this.name = name;
+            this.gold = gold;
             this.skills = new List<ISkill>();
             this.inventory = new Inventory(5);
             status = new Dictionary<Status, int>();
-        }
-
-        public string Stats()
-        {
-            throw new NotImplementedException();
         }
 
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
@@ -66,7 +63,7 @@ namespace EntityEngine.Entities.Players
                 }
             }
         }
-        Inventory IPlayer.PlayerInventory { get => inventory; }
+        Inventory IHumanoid.Inventory { get => inventory; }
         int IEntity.Attack { get => attack; set => attack = value; }
         int IEntity.Defence { get => defence; set => defence = value; }
         int IEntity.Levels { get => levels; set => levels = value; }
@@ -82,10 +79,17 @@ namespace EntityEngine.Entities.Players
                 luck = value;
             } 
         }
-        int IEntity.HealthPoint { get => hp; set => hp = value; }
+        int IEntity.HealthPoint { get => hp; 
+            set
+            {
+                if (value <= maxHp) hp = value;
+                else hp = maxHp;
+            }
+        }
         string IEntity.Name { get => name; }
         Dictionary<Status, int> IEntity.Status { get => status; set => status = value; }
         int IEntity.Speed { get => speed; set => speed = value; }
         public int MaxHealthPoint { get => maxHp; set => maxHp = value; }
+        public int Gold { get => gold; set => gold; }
     }
 }
