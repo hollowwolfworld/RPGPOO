@@ -12,11 +12,11 @@ namespace EntityEngine.Entities.Players
     {
         private static EntityLevelupSkill EntityLevelupSkill { get; set; } = new EntityLevelupSkill();
         public static int XPNeeded(int level) => Convert.ToInt32(Math.Round(75 * Math.Pow(level, 1.5)));
-        public static List<ISkill> GetSkillsForLevel(int level, IEntity entity)
+        public static List<ISkill> GetSkillsForLevel(int level, Type entity)
         {
             List<ISkill> skills = new List<ISkill>();
             var entitiesSkillsLevels = EntityLevelupSkill.EntitiesSkill;
-            var entities = EntityLevelupSkill.EntitiesSkill.Keys.ToList().FindAll((key) => key == entity.GetType().ToString());
+            var entities = EntityLevelupSkill.EntitiesSkill.Keys.ToList().FindAll((key) => key == entity.ToString());
 
             foreach (var ent in entities)
             {

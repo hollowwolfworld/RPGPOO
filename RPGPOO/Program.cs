@@ -8,7 +8,15 @@ namespace RPGPOO
     {
         public static void Main(string[] args)
         {
-            var skills = LevelManager.GetSkillsForLevel(1, new Warrior(0,0,0,0,0,0,0,0,""));
+            var builder = new Warrior.Builder();
+            var warior = builder
+                .SetName("UwU")
+                .SetGold(100)
+                .SetLuck(500)
+                .Build();
+
+
+            var skills = LevelManager.GetSkillsForLevel(1, );
 
             skills.ForEach(sk => Console.WriteLine(sk.GetType()));
         }

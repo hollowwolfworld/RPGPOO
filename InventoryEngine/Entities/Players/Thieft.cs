@@ -26,22 +26,22 @@ namespace EntityEngine.Entities.Players
         private int luck;
         private int gold;
 
-        public Thieft(int levels, int xp, int maxHp, int hp, int attack, int defence, int speed, int luck, string name, int gold)
+        public Thieft(string name, int levels, int xp, int maxHp, int hp, int attack, int defence, int speed, int luck, int gold, Dictionary<Status, int> status, 
+            List<ISkill> skills, Inventory inventory)
         {
+            this.name = name;
+            this.levels = levels;
+            this.xp = xp;
             this.maxHp = maxHp;
             this.hp = hp;
             this.attack = attack;
             this.defence = defence;
             this.speed = speed;
-            this.levels = levels;
-            this.xp = xp;
-            this.name = name;
             this.luck = luck;
-            this.name = name;
             this.gold = gold;
-            this.skills = new List<ISkill>();
-            this.inventory = new Inventory(5);
-            status = new Dictionary<Status, int>();
+            this.status = status;
+            this.skills = skills;
+            this.inventory = inventory;
         }
 
         List<ISkill> IEntity.Skills { get => skills; set => skills = value; }
@@ -66,7 +66,7 @@ namespace EntityEngine.Entities.Players
                     {
                         luck += rand.Next(1, 3);
                     }
-                    skills = LevelManager.GetSkillsForLevel(levels, this);
+                    skills = LevelManager.GetSkillsForLevel(levels, GetType());
                 }
             }
         }
@@ -100,5 +100,105 @@ namespace EntityEngine.Entities.Players
         int IEntity.Speed { get => speed; set => speed = value; }
         int IEntity.MaxHealthPoint { get => maxHp; set => maxHp = value; }
         public int Gold { get => gold; set => gold = value; }
+
+        public class Builder
+        {
+            private string name = "Thieft";
+            private int level = 1;
+            private int experience = 0;
+            private int maxHealth = 50;
+            private int health = 50;
+            private int attack = 12;
+            private int defence = 10;
+            private int speed = 6;
+            private int luck = new Random().Next(0, 100);
+            private int gold = 0;
+            private Dictionary<Status, int> status = new Dictionary<Status, int>();
+            private List<ISkill> skills = LevelManager.GetSkillsForLevel(1, typeof(Thieft));
+            private Inventory inventory = new Inventory(5);
+
+            public Thieft Build()
+            {
+                return new Thieft(name, level, experience, maxHealth, health, attack, defence, speed, luck, gold, status, skills, inventory);
+            }
+
+            public Builder SetName(string name)
+            {
+                this.name = name;
+                return this;
+            }
+
+            public Builder SetLevel(int level)
+            {
+                this.level = level;
+                return this;
+            }
+
+            public Builder SetExperience(int experience)
+            {
+                this.experience = experience;
+                return this;
+            }
+
+            public Builder SetMaxHealth(int maxHealth)
+            {
+                this.maxHealth = maxHealth;
+                return this;
+            }
+
+            public Builder SetHealth(int health)
+            {
+                this.health = health;
+                return this;
+            }
+
+            public Builder SetAttack(int attack)
+            {
+                this.attack = attack;
+                return this;
+            }
+
+            public Builder SetDefence(int defence)
+            {
+                this.defence = defence;
+                return this;
+            }
+
+            public Builder SetSpeed(int speed)
+            {
+                this.speed = speed;
+                return this;
+            }
+
+            public Builder SetGold(int gold)
+            {
+                this.gold = gold;
+                return this;
+            }
+
+            public Builder SetLuck(int luck)
+            {
+                this.luck = luck;
+                return this;
+            }
+
+            public Builder SetStatus(Dictionary<Status, int> status)
+            {
+                this.status = status;
+                return this;
+            }
+
+            public Builder SetSkills(List<ISkill> skills)
+            {
+                this.skills = skills;
+                return this;
+            }
+
+            public Builder SetInventory(Inventory inventory)
+            {
+                this.inventory = inventory;
+                return this;
+            }
+        }
     }
 }
