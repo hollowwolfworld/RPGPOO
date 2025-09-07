@@ -15,7 +15,7 @@ namespace FightEngine.Skills
         {
             if (from is not Thieft) throw new NotAllowedToUseSkill();
 
-            int result = DamageCalculator.CalculateDamage(from.Attack, from.Chance, 0);
+            int result = DamageCalculator.CalculateDamage(from.Attack, from.Luck, 0);
 
             to.HealthPoint -= result;
         }

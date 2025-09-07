@@ -2,6 +2,8 @@
 using EntityEngine.Entities;
 using EntityEngine.Entities.Enemies;
 using EntityEngine.Entities.Players;
+using System.Security.Cryptography;
+using EntityEngine;
 
 namespace TestFightEngine
 {
@@ -15,23 +17,50 @@ namespace TestFightEngine
         public void InflictDamage(int fromEntityAttack, int toEntityHp, int fromEntityLuck, int toEntityDefence,
             int minDamage, int maxDamage)
         {
-            int maxHp = 40;
-            int hp = 40;
-            int maxMp = 10;
-            int mp = 10;
-            int attack = 12;
-            int defence = 12;
-            int speed = 5;
-            int luck = 50;
-            int level = 1;
-            int xp = 0;
+            IEntity from = new Slime.Builder()
+                .SetAttack(fromEntityAttack)
+                .SetLuck(fromEntityLuck)
+                .Build();
 
-            IEntity from = new Slime(maxHp, hp, maxMp, mp, fromEntityAttack, defence, speed, fromEntityLuck, level, "Slime");
-            IEntity to = new Warrior(xp, level, toEntityHp, toEntityHp, attack, toEntityDefence, speed, luck, "UwU");
+            IEntity to = new Warrior.Builder()
+                .SetHealth(toEntityHp)
+                .SetDefence(toEntityDefence)
+                .Build();
 
-            int damage = DamageCalculator.CalculateDamage(from, to);
+            Arena test = new Arena(from, to);
 
-            Assert.IsTrue(damage >= minDamage && damage <= maxDamage);
+            int toHp = to.HealthPoint;
+
+            test.Hit(from,to);
+
+            Assert.IsTrue(to.HealthPoint >= toHp - minDamage && to.HealthPoint <= toHp - maxDamage);
+        }
+
+        [DataTestMethod]
+        [DataRow(5, 6)]
+        [DataRow(5, 4)]
+        [DataRow(5, 5)]
+        
+
+        public void Testspeed(int fromSpeed, int toSpeed)
+        {
+            IEntity from = new Slime.Builder()
+               .SetSpeed(fromSpeed)
+               .Build();
+
+            IEntity to = new Warrior.Builder()
+                .SetSpeed(toSpeed)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            SimpleMove moveUn = new SimpleMove();
+            MoveAction un = new MoveAction(to,moveUn);
+            SimpleMove moveDeux = new SimpleMove();
+            MoveAction deux = new MoveAction(from, moveDeux);
+
+            test.Turn(un, deux);
+
+            Assert.EndsWith()
         }
     }
 }

@@ -184,7 +184,7 @@ namespace FightEngine
                     Random rand = new Random();
                     int luckFlee = rand.Next(1, 101);
 
-                    if (luckFlee <= Arena.FirstFighter.Chance)
+                    if (luckFlee <= Arena.FirstFighter.Luck)
                     {
                         return -1;
                     }

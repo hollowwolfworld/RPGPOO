@@ -18,7 +18,7 @@ namespace EntityEngine.Entities.Skills
 
             int damage = from.Attack * victim.Gold / 100 ;
 
-            DamageCalculator.CalculateDamage(damage,from.Chance,to.Defence);
+            DamageCalculator.CalculateDamage(damage,from.Luck,to.Defence);
         }
     }
 }

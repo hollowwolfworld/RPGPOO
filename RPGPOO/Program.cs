@@ -16,7 +16,7 @@ namespace RPGPOO
                 .Build();
 
 
-            var skills = LevelManager.GetSkillsForLevel(1, );
+            var skills = LevelManager.GetSkillsForLevel(1, typeof(Warrior));
 
             skills.ForEach(sk => Console.WriteLine(sk.GetType()));
         }
