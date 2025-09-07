@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FightEngine;
-using EntityEngine.Entities;
-using EntityEngine.Entities.Enemies;
+﻿using EntityEngine.Entities;
 using EntityEngine.Entities.Players;
-using System.Linq.Expressions;
 using FightEngine.Skills;
 using EntityEngine.Inventories.Items;
 
@@ -24,6 +16,12 @@ namespace FightEngine
             SecondFighter = secondFighter;
         }
 
+        /// <summary>
+        /// Effectue une attack simple
+        /// </summary>
+        /// <param name="striker">L'attaquant</param>
+        /// <param name="target">Le défenceur</param>
+        /// <exception cref="Exception">Lance une exeption si les entité ne sont pas dans l'arène</exception>
         public void Hit(IEntity striker, IEntity target)
         {
             if (!VerifyEntity(striker) && !VerifyEntity(target)) throw new Exception();
@@ -33,6 +31,13 @@ namespace FightEngine
             target.HealthPoint -= damage;
         }
 
+        /// <summary>
+        /// Fait utiliser un skill par le lanceur sur le défenceur
+        /// </summary>
+        /// <param name="striker">Le lanceur</param>
+        /// <param name="target">Le défenceur</param>
+        /// <param name="skill">Le skill à utiliser</param>
+        /// <exception cref="Exception">Lance une exeption si le lanceur n'as pas le skill ou si le lanceur et la cible ne sont pas dans l'arène</exception>
         public void UseSkill(IEntity striker, IEntity target, ISkill skill)
         {
             if (!VerifyEntity(striker) && !VerifyEntity(target)) throw new Exception();
@@ -42,6 +47,13 @@ namespace FightEngine
             skill.UseSkill(striker, target);
         }
 
+        /// <summary>
+        /// Le lanceur utilise un item sur la cible
+        /// </summary>
+        /// <param name="striker">Le lanceur</param>
+        /// <param name="targer">La cible</param>
+        /// <param name="item">L'item</param>
+        /// <exception cref="Exception">Lance une exeption si le lanceur n'as pas l'item dans son inventaire et ou si l'item n'est pas utilisable ou si le lanceur n'est pas un joueur ou si le lanceur et la cible ne sont pas dans l'arène</exception>
         public void UseItems(IEntity striker, IEntity targer, Item item)
         {
             if (!VerifyEntity(striker) && !VerifyEntity(targer)) throw new Exception();
