@@ -1,6 +1,7 @@
 ﻿using EntityEngine;
 using EntityEngine.Entities;
 using EntityEngine.Inventories.Items;
+using FightEngine;
 using FightEngine.Skills;
 using System.ComponentModel.Design;
 
@@ -8,11 +9,19 @@ namespace FightEngine
 {
     public class FightTurns
     {
+        //l'Arène où se passe le combat
         Arena Arena { get; set; }
+        /// <summary>
+        /// Nombre de trours
+        /// </summary>
         int CptTours { get; set; }
 
         
-
+        /// <summary>
+        /// Création d'une arène
+        /// </summary>
+        /// <param name="fighter1">Le combatant 1</param>
+        /// <param name="fighter2">Le combatant 2</param>
         public FightTurns(IEntity fighter1, IEntity fighter2)
         {
             Arena = new Arena(fighter1, fighter2);
@@ -20,134 +29,37 @@ namespace FightEngine
         }
 
         /// <summary>
-        /// 
+        /// Execute un tour du combat
         /// </summary>
         /// <param name="">Le move choisit par fighter1</param>
         /// <param name="">Le move choisit par fighter2</param>
         /// <return>-1 si le fighter1 à perdu, 1 si figther 2 à perdu, 0 si le combat n'est pas fini</return>
         public int Turn(MoveAction moveF1, MoveAction moveF2)
         {
-            // si P1 est plus rapide que P2 alors il commncera a attaquer en premier
-            // utilisation d'une option de combat
             if (Arena.FirstFighter.Speed >= Arena.SecondFighter.Speed)
             {
-                if(!Arena.FirstFighter.Status.ContainsKey(Status.PARALYSED))
-                {
-                    var nameLaterWithBetterName = MakeMove(Arena.FirstFighter, moveF1);
+                var moveResult = MakeMove(Arena.FirstFighter, moveF1);
 
-                    if (nameLaterWithBetterName < 0) return -1;
-                }
-                if(!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED) && Arena.SecondFighter.HealthPoint > 0)
-                {
-                    var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
+                if (moveResult < 0) return -1;
 
-                    if (nameLaterWithBetterName < 0) { return 1; }
-                }
+                moveResult = MakeMove(Arena.SecondFighter, moveF2);
+
+                if (moveResult < 0) return 1;
             }
-            // si P2 est plus rapide que P1 alors il commncera a attaquer en premier
             else
             {
-                if (!Arena.FirstFighter.Status.ContainsKey(Status.PARALYSED))
-                {
-                    var nameLaterWithBetterName = MakeMove(Arena.FirstFighter, moveF1);
+                var moveResult = MakeMove(Arena.SecondFighter, moveF2);
 
-                    if (nameLaterWithBetterName < 0) return -1;
-                }
-                if (!Arena.SecondFighter.Status.ContainsKey(Status.PARALYSED) && Arena.FirstFighter.HealthPoint > 0)
-                {
-                    var nameLaterWithBetterName = MakeMove(Arena.SecondFighter, moveF2);
+                if (moveResult < 0) return -1;
 
-                    if (nameLaterWithBetterName < 0) { return 1; }
-                }
-                //utilisation d'une option de combat
+                moveResult = MakeMove(Arena.FirstFighter, moveF1);
+
+                if (moveResult < 0) return 1;
             }
 
-            //Appliquez les status
-            foreach (var status in Arena.FirstFighter.Status)
-            {
-                switch(status.Key)
-                {
-                    case Status.BURN:
-                        break;
-                    case Status.POISONED:
-                        break;
-                }
-            }
+            ProcessEffect(Arena.FirstFighter);
+            ProcessEffect(Arena.SecondFighter);
 
-            foreach (var status in Arena.FirstFighter.Status)
-            {
-                switch (status.Key)
-                {
-                    case Status.RAGE:
-                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.FirstFighter, status.Key);
-                        } 
-                        break;
-                    case Status.BURN:
-                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.FirstFighter, status.Key);
-                        }
-                        else
-                        {
-                            ApplyStatusDamage(Arena.FirstFighter, status.Key);
-                        }
-                            break;
-                    case Status.POISONED:
-                        Arena.FirstFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.FirstFighter, status.Key);
-                        }
-                        else
-                        {
-                            ApplyStatusDamage(Arena.FirstFighter, status.Key);
-                        }
-                        break;
-                }
-            }
-
-            foreach (var status in Arena.SecondFighter.Status)
-            {
-                switch (status.Key)
-                {
-                    case Status.RAGE:
-                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.SecondFighter, status.Key);
-                        }
-                        
-                            break;
-                    case Status.BURN:
-                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.SecondFighter, status.Key);
-                        }
-                        else
-                        {
-                            ApplyStatusDamage(Arena.SecondFighter, status.Key);
-                        }
-                        break;
-                    case Status.POISONED:
-                        Arena.SecondFighter.Status[status.Key] = status.Value - 1;
-                        if (status.Value == 0)
-                        {
-                            RemovedStatus(Arena.SecondFighter, status.Key);
-                        }
-                        else
-                        {
-                            ApplyStatusDamage(Arena.SecondFighter, status.Key);
-                        }
-                        break;
-                }
-            }
-
-            //retours d'une valeur celon le resultat du combat
             if (Arena.FirstFighter.HealthPoint <= 0)
             {
                 return -1;
@@ -162,8 +74,59 @@ namespace FightEngine
             return 0;
         }
 
+
+        /// <summary>
+        /// Appliques les effets donnez au entité (éxécuter à la fin du tour)
+        /// </summary>
+        /// <param name="entity">L'entité sur laquelle appliquer les effets</param>
+        private void ProcessEffect(IEntity entity)
+        {
+            foreach (var status in entity.Status)
+            {
+                switch (status.Key)
+                {
+                    case Status.RAGE:
+                        entity.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(entity, status.Key);
+                        }
+                        break;
+                    case Status.BURN:
+                        entity.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(entity, status.Key);
+                        }
+                        else
+                        {
+                            ApplyStatusDamage(entity, status.Key);
+                        }
+                        break;
+                    case Status.POISONED:
+                        entity.Status[status.Key] = status.Value - 1;
+                        if (status.Value == 0)
+                        {
+                            RemovedStatus(entity, status.Key);
+                        }
+                        else
+                        {
+                            ApplyStatusDamage(entity, status.Key);
+                        }
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Effectue une action à une entité
+        /// </summary>
+        /// <param name="user">L'utilisateur de l'action</param>
+        /// <param name="move">L'action</param>
+        /// <returns>-1 si le joueur à fuits avec succès</returns>
         private int MakeMove(IEntity user, MoveAction move)
         {
+            if (user.Status.ContainsKey(Status.PARALYSED)) return 0;
             switch (move.Move)
             {
                 case ISkill skill:
@@ -176,39 +139,46 @@ namespace FightEngine
                     Arena.Hit(user, move.Target);
                     break;
                 case Flee flee:
-                    if (user.Speed > flee.Opponent.Speed)
-                    {
-                        return -1;
-                    }
-
-                    Random rand = new Random();
-                    int luckFlee = rand.Next(1, 101);
-
-                    if (luckFlee <= Arena.FirstFighter.Luck)
-                    {
-                        return -1;
-                    }
+                    if (!CanFlee(user.Luck, user.Speed, move.Target.Speed)) return -1;
                     break;
             }
 
             return 0;
         }
 
+        /// <summary>
+        /// Retire un status à une entité
+        /// </summary>
+        /// <param name="entity">L'entité à qui l'on enlève le status</param>
+        /// <param name="status">Le status à enlever</param>
         private void RemovedStatus(IEntity entity, Status status)
         {
             entity.Status.Remove(status);
         }
 
-        private void ApplyStatusDamage(IEntity entity, Status? status)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="status"></param>
+        private void ApplyStatusDamage(IEntity entity, Status status)
         {
             int hurt = 7 * entity.MaxHealthPoint / 100;
-            if (status is not null)
-            {
+            entity.HealthPoint =- hurt;
+        }
 
-                entity.HealthPoint =- hurt;
-            }
-
-            
+        /// <summary>
+        /// Regarde si l'entité peut fuire
+        /// </summary>
+        /// <param name="userLuck">La chance de l'entité</param>
+        /// <param name="userSpeed">La vitesse de l'entité</param>
+        /// <param name="opponentSpeed">La vitesse de l'adversaire</param>
+        /// <returns>retourne true si il peut fuir</returns>
+        private bool CanFlee(int userLuck, int userSpeed, int opponentSpeed)
+        {
+            Random rand = new Random();
+            int luckFlee = rand.Next(1, 101);
+            return luckFlee > userLuck || userSpeed <= opponentSpeed;
         }
     }
 
