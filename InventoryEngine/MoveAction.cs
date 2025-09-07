@@ -17,10 +17,5 @@ namespace EntityEngine
             Target = target;
             Move = move;
         }
-
-        public void Hit()
-        {
-
-        }
     }
 }

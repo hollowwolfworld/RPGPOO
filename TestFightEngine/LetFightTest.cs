@@ -33,34 +33,36 @@ namespace TestFightEngine
 
             test.Hit(from,to);
 
-            Assert.IsTrue(to.HealthPoint >= toHp - minDamage && to.HealthPoint <= toHp - maxDamage);
+            Assert.IsTrue(to.HealthPoint <= toHp - minDamage && to.HealthPoint >= toHp - maxDamage);
         }
 
         [DataTestMethod]
-        [DataRow(5, 6)]
-        [DataRow(5, 4)]
-        [DataRow(5, 5)]
-        
-
-        public void Testspeed(int fromSpeed, int toSpeed)
+        [DataRow(5, 6, 1000, 1, 1)]
+        [DataRow(5, 6, 1, 1000, -1)]
+        [DataRow(5, 4 , 1000, 1, 1)]
+        [DataRow(5, 4, 1, 1000, -1)]
+        [DataRow(5, 5 ,1000, 1, 1)]
+        [DataRow(5, 5, 1, 1000, -1)]
+        public void Testspeed(int fromSpeed, int toSpeed,int fromHp, int  toHp, int expected)
         {
             IEntity from = new Slime.Builder()
                .SetSpeed(fromSpeed)
+               .SetHealth(fromHp)
                .Build();
 
             IEntity to = new Warrior.Builder()
                 .SetSpeed(toSpeed)
+                .SetHealth(toHp)
                 .Build();
 
             FightTurns test = new FightTurns(from, to);
-            SimpleMove moveUn = new SimpleMove();
-            MoveAction un = new MoveAction(to,moveUn);
-            SimpleMove moveDeux = new SimpleMove();
-            MoveAction deux = new MoveAction(from, moveDeux);
+            SimpleMove move = new SimpleMove();
+            MoveAction un = new MoveAction(to, move);
+            MoveAction deux = new MoveAction(from, move);
 
-            test.Turn(un, deux);
+            int result = test.Turn(un, deux);
 
-            Assert.EndsWith()
+            Assert.AreEqual(expected, result);
         }
     }
 }

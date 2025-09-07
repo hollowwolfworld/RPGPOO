@@ -50,11 +50,11 @@ namespace FightEngine
             {
                 var moveResult = MakeMove(Arena.SecondFighter, moveF2);
 
-                if (moveResult < 0) return -1;
+                if (moveResult < 0) return 1;
 
                 moveResult = MakeMove(Arena.FirstFighter, moveF1);
 
-                if (moveResult < 0) return 1;
+                if (moveResult < 0) return -1;
             }
 
             ProcessEffect(Arena.FirstFighter);
