@@ -56,7 +56,64 @@ namespace TestFightEngine
                 .Build();
 
             FightTurns test = new FightTurns(from, to);
-            SimpleMove move = new SimpleMove();
+            Move move = new SimpleMove();
+            MoveAction un = new MoveAction(to, move);
+            MoveAction deux = new MoveAction(from, move);
+
+            int result = test.Turn(un, deux);
+
+            Assert.AreEqual(expected, result);
+
+        }
+        [DataTestMethod]
+        [DataRow(Status.PARALYSED, null, 5, 6, 1000, 1, 1)]
+        [DataRow(null, Status.PARALYSED, 5, 6, 1000, 1, 1)]
+        [DataRow(Status.PARALYSED, null, 5, 6, 1, 1000, -1)]
+        [DataRow(null, Status.PARALYSED, 5, 6, 1, 1000, 1)]
+
+        [DataRow(Status.PARALYSED, null, 5, 4, 1000, 1, 1)]
+        [DataRow(null, Status.PARALYSED, 5, 4, 1000, 1, -1)]
+        [DataRow(Status.PARALYSED, null, 5, 4, 1, 1000, 1)]
+        [DataRow(null, Status.PARALYSED, 5, 4, 1, 1000, 1)]
+
+        [DataRow(Status.PARALYSED, null, 5, 5, 1000, 1, 1)]
+        [DataRow(null, Status.PARALYSED, 5, 5, 1000, 1, -1)]
+        [DataRow(Status.PARALYSED, null, 5, 5, 1, 1000, 1)]
+        [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, 1)]
+        [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
+
+        public void TestStatue(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
+        {
+            var dicFrom = new Dictionary<Status, int>()
+            {
+                {
+                    statusFrom,
+                    2
+                },
+            };
+            var dicTo = new Dictionary<Status, int>()
+            {
+                {
+                    statusTo,
+                    2
+                },
+            };
+
+            IEntity from = new Slime.Builder()
+               .SetSpeed(fromSpeed)
+               .SetHealth(fromHp)
+               .SetStatus(dicFrom)
+               .Build();
+
+            IEntity to = new Warrior.Builder()
+                .SetSpeed(toSpeed)
+                .SetHealth(toHp)
+                .SetStatus(dicTo)
+                .Build();
+
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new SimpleMove();
             MoveAction un = new MoveAction(to, move);
             MoveAction deux = new MoveAction(from, move);
 
