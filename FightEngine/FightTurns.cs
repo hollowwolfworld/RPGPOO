@@ -9,7 +9,9 @@ namespace FightEngine
 {
     public class FightTurns
     {
-        //l'Arène où se passe le combat
+        /// <summary>
+        /// L'Arène où se passe le combat
+        /// </summary>
         Arena Arena { get; set; }
         /// <summary>
         /// Nombre de trours
