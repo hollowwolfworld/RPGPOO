@@ -39,22 +39,22 @@ namespace FightEngine
             if (Arena.FirstFighter.Speed >= Arena.SecondFighter.Speed)
             {
                 var moveResult = MakeMove(Arena.FirstFighter, moveF1);
-
-                if (moveResult < 0) return -1;
+                
+                if(moveResult != 0) return moveResult;
 
                 moveResult = MakeMove(Arena.SecondFighter, moveF2);
 
-                if (moveResult < 0) return 1;
+                if (moveResult != 0) return moveResult;
             }
             else
             {
                 var moveResult = MakeMove(Arena.SecondFighter, moveF2);
 
-                if (moveResult < 0) return 1;
+                if (moveResult != 0) return moveResult;
 
                 moveResult = MakeMove(Arena.FirstFighter, moveF1);
 
-                if (moveResult < 0) return -1;
+                if (moveResult != 0) return moveResult;
             }
 
             ProcessEffect(Arena.FirstFighter);
@@ -142,6 +142,9 @@ namespace FightEngine
                     if (!CanFlee(user.Luck, user.Speed, move.Target.Speed)) return -1;
                     break;
             }
+
+            if(move.Target.HealthPoint < 0 && move.Target == Arena.FirstFighter) return 1;
+            if (move.Target.HealthPoint < 0 && move.Target == Arena.SecondFighter) return -1;
 
             return 0;
         }
