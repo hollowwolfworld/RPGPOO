@@ -88,7 +88,7 @@ namespace TestFightEngine
         [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, 0)]
         [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
 
-        public void TestStatue(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
+        public void TestStatuePara(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
             {
@@ -128,6 +128,30 @@ namespace TestFightEngine
             int result = test.Turn(un, deux);
 
             Assert.AreEqual(expected, result);
+        }
+
+        [DataTestMethod]
+        [DataRow(Status.BURN, null, 5, 6, 1000, 1, 0)]
+        [DataRow(null, Status.BURN, 5, 6, 1000, 1, 1)]
+        [DataRow(Status.BURN, null, 5, 6, 1, 1000, -1)]
+        [DataRow(null, Status.BURN, 5, 6, 1, 1000, 0)]
+        [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
+        public void TestStatueBurn(Status statusFrom, Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
+        {
+            var dicFrom = new Dictionary<Status, int>()
+            {
+                {
+                    statusFrom,
+                    2
+                },
+            };
+            var dicTo = new Dictionary<Status, int>()
+            {
+                {
+                    statusTo,
+                    2
+                },
+            };
         }
     }
 }
