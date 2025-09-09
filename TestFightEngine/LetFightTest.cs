@@ -135,7 +135,7 @@ namespace TestFightEngine
         [DataRow(null, Status.BURN, 5, 6, 1000, 1, 1)]
         [DataRow(Status.BURN, null, 5, 6, 1, 1000, -1)]
         [DataRow(null, Status.BURN, 5, 6, 1, 1000, 0)]
-        [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
+        [DataRow(Status.BURN, Status.BURN, 5, 5, 1, 1000, 0)]
         public void TestStatueBurn(Status statusFrom, Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
@@ -152,6 +152,27 @@ namespace TestFightEngine
                     2
                 },
             };
+
+            IEntity from = new Warrior.Builder()
+              .SetSpeed(fromSpeed)
+              .SetHealth(fromHp)
+              .SetMaxHealth(fromHp)
+              .SetStatus(dicFrom)
+              .Build();
+
+            IEntity to = new Slime.Builder()
+                .SetSpeed(toSpeed)
+                .SetHealth(toHp)
+                .SetMaxHealth(toHp)
+                .SetStatus(dicTo)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new DoNothing();
+            MoveAction un = new MoveAction(to, move);
+            MoveAction deux = new MoveAction(from, move);
+
+            Assert.IsTrue(expected == from.HealthPoint || expected == to.HealthPoint);
         }
     }
 }

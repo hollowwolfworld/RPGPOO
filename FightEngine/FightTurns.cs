@@ -122,29 +122,29 @@ namespace FightEngine
         /// Effectue une action à une entité
         /// </summary>
         /// <param name="user">L'utilisateur de l'action</param>
-        /// <param name="move">L'action</param>
+        /// <param name="action">L'action</param>
         /// <returns>-1 si le joueur à fuits avec succès</returns>
-        private int MakeMove(IEntity user, MoveAction move)
+        private int MakeMove(IEntity user, MoveAction action)
         {
             if (user.Status.ContainsKey(Status.PARALYSED)) return 0;
-            switch (move.Move)
+            switch (action.Move)
             {
                 case ISkill skill:
-                    Arena.UseSkill(user, move.Target, skill!);
+                    Arena.UseSkill(user, action.Target, skill!);
                     break;
                 case UsableItem item:
-                    Arena.UseItems(user, move.Target, item);
+                    Arena.UseItems(user, action.Target, item);
                     break;
                 case SimpleMove:
-                    Arena.Hit(user, move.Target);
+                    Arena.Hit(user, action.Target);
                     break;
                 case Flee flee:
-                    if (!CanFlee(user.Luck, user.Speed, move.Target.Speed)) return -1;
+                    if (!CanFlee(user.Luck, user.Speed, action.Target.Speed)) return -1;
                     break;
             }
 
-            if(move.Target.HealthPoint <= 0 && move.Target == Arena.FirstFighter) return -1;
-            if (move.Target.HealthPoint <= 0 && move.Target == Arena.SecondFighter) return 1;
+            if(action.Target.HealthPoint <= 0 && action.Target == Arena.FirstFighter) return -1;
+            if (action.Target.HealthPoint <= 0 && action.Target == Arena.SecondFighter) return 1;
 
             return 0;
         }
