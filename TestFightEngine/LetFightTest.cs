@@ -38,9 +38,15 @@ namespace TestFightEngine
 
         [DataTestMethod]
         [DataRow(5, 6, 1, 1, -1)]
-        
+
+        [DataRow(5, 6, 1000, 1000, 0)]
+
+        [DataRow(5, 6, 1000, 1, 1)]
+
         [DataRow(5, 4 , 1, 1, 1)]
-       
+
+        [DataRow(5, 4, 1, 1000, -1)]
+
         [DataRow(5, 5 ,1, 1, 1)]
         
         public void Testspeed(int fromSpeed, int toSpeed,int fromHp, int  toHp, int expected)
@@ -57,8 +63,8 @@ namespace TestFightEngine
 
             FightTurns test = new FightTurns(from, to);
             Move move = new SimpleMove();
-            MoveAction deux = new MoveAction(to, move);
-            MoveAction un = new MoveAction(from, move);
+            MoveAction deux = new MoveAction(from, move);
+            MoveAction un = new MoveAction(to, move);
 
             int result = test.Turn(un, deux);
 
@@ -66,20 +72,20 @@ namespace TestFightEngine
 
         }
         [DataTestMethod]
-        [DataRow(Status.PARALYSED, null, 5, 6, 1000, 1, 1)]
+        [DataRow(Status.PARALYSED, null, 5, 6, 1000, 1, 0)]
         [DataRow(null, Status.PARALYSED, 5, 6, 1000, 1, 1)]
         [DataRow(Status.PARALYSED, null, 5, 6, 1, 1000, -1)]
-        [DataRow(null, Status.PARALYSED, 5, 6, 1, 1000, -1)]
+        [DataRow(null, Status.PARALYSED, 5, 6, 1, 1000, 0)]
 
-        [DataRow(Status.PARALYSED, null, 5, 4, 1000, 1, 1)]
+        [DataRow(Status.PARALYSED, null, 5, 4, 1000, 1, 0)]
         [DataRow(null, Status.PARALYSED, 5, 4, 1000, 1, 1)]
         [DataRow(Status.PARALYSED, null, 5, 4, 1, 1000, -1)]
-        [DataRow(null, Status.PARALYSED, 5, 4, 1, 1000, -1)]
+        [DataRow(null, Status.PARALYSED, 5, 4, 1, 1000, 0)]
 
-        [DataRow(Status.PARALYSED, null, 5, 5, 1000, 1,  1)]
+        [DataRow(Status.PARALYSED, null, 5, 5, 1000, 1,  0)]
         [DataRow(null, Status.PARALYSED, 5, 5, 1000, 1, 1)]
         [DataRow(Status.PARALYSED, null, 5, 5, 1, 1000, -1)]
-        [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, -1)]
+        [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, 0)]
         [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
 
         public void TestStatue(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
@@ -99,15 +105,17 @@ namespace TestFightEngine
                 },
             };
 
-            IEntity from = new Slime.Builder()
+            IEntity from = new Warrior.Builder()
                .SetSpeed(fromSpeed)
                .SetHealth(fromHp)
+               .SetMaxHealth(fromHp)
                .SetStatus(dicFrom)
                .Build();
 
-            IEntity to = new Warrior.Builder()
+            IEntity to = new Slime.Builder()
                 .SetSpeed(toSpeed)
                 .SetHealth(toHp)
+                .SetMaxHealth(toHp)
                 .SetStatus(dicTo)
                 .Build();
 

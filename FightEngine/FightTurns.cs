@@ -143,8 +143,8 @@ namespace FightEngine
                     break;
             }
 
-            if(move.Target.HealthPoint < 0 && move.Target == Arena.FirstFighter) return 1;
-            if (move.Target.HealthPoint < 0 && move.Target == Arena.SecondFighter) return -1;
+            if(move.Target.HealthPoint <= 0 && move.Target == Arena.FirstFighter) return -1;
+            if (move.Target.HealthPoint <= 0 && move.Target == Arena.SecondFighter) return 1;
 
             return 0;
         }

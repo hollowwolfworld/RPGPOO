@@ -8,6 +8,7 @@ namespace EntityEngine.Entities
 {
     public enum Status
     {
+        CLEAR,
         BURN,
         PARALYSED,
         POISONED,
