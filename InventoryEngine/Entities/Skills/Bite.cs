@@ -23,11 +23,20 @@ namespace FightEngine.Skills
                 damage *= 0.5;
 
                 damage = Math.Max(1, Math.Floor(damage));
+
+                int d = Convert.ToInt32(damage);
+
+                to.HealthPoint -= d;
+
             } else if (to is Sorcerer)
             {
                 damage *= 1.5;
 
                 damage = Math.Max(1, Math.Floor(damage));
+
+                int d = Convert.ToInt32(damage);
+
+                to.HealthPoint -= d;
             }
 
             to.HealthPoint -= Convert.ToInt32(damage);

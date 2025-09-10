@@ -37,9 +37,18 @@ namespace FightEngine
         {
             if (!VerifyEntity(striker) && !VerifyEntity(target)) throw new Exception();
 
-            if(!striker.Skills.Contains(skill)) throw new Exception();
+            if (!ContainSkill(striker, skill)) throw new Exception();
 
             skill.UseSkill(striker, target);
+        }
+
+        private bool ContainSkill(IEntity striker, ISkill skill)
+        {
+            foreach (var strikerSkill in striker.Skills)
+            {
+                if (strikerSkill.GetType() == skill.GetType()) return true;
+            }
+            return false;
         }
 
         public void UseItems(IEntity striker, IEntity targer, Item item)

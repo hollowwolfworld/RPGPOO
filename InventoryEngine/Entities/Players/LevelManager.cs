@@ -20,7 +20,7 @@ namespace EntityEngine.Entities.Players
 
             foreach (var ent in entities)
             {
-                var skillForLevel = entitiesSkillsLevels[ent].FindAll((skillLevel => skillLevel.Level <= level)).Select((skillLevel) => skillLevel.Skill);
+                var skillForLevel = entitiesSkillsLevels[ent.ToString()].FindAll((skillLevel => skillLevel.Level <= level)).Select((skillLevel) => skillLevel.Skill);
                 skills.AddRange(skillForLevel);
             }
 

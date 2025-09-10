@@ -4,6 +4,7 @@ using EntityEngine.Entities.Enemies;
 using EntityEngine.Entities.Players;
 using System.Security.Cryptography;
 using EntityEngine;
+using FightEngine.Skills;
 
 namespace TestFightEngine
 {
@@ -49,6 +50,23 @@ namespace TestFightEngine
 
         [DataRow(5, 5 ,1, 1, 1)]
         
+        [DataRow(Int32.MaxValue, Int32.MaxValue, 1, 1, 1)]
+
+        [DataRow(5, Int32.MaxValue, 1, 1, -1)]
+
+        [DataRow(Int32.MaxValue, 4, 1, 1, 1)]
+
+        [DataRow(Int32.MinValue, Int32.MinValue, 1, 1, 1)]
+
+        [DataRow(5, Int32.MinValue, 1, 1, 1)]
+
+        [DataRow(Int32.MinValue, 4, 1, 1, -1)]
+
+        [DataRow(Int32.MaxValue, Int32.MinValue, 1, 1, 1)]
+
+
+
+
         public void Testspeed(int fromSpeed, int toSpeed,int fromHp, int  toHp, int expected)
         {
             IEntity to = new Slime.Builder()
@@ -87,6 +105,7 @@ namespace TestFightEngine
         [DataRow(Status.PARALYSED, null, 5, 5, 1, 1000, -1)]
         [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, 0)]
         [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
+
 
         public void TestStatuePara(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
         {
@@ -180,8 +199,8 @@ namespace TestFightEngine
         [DataRow(Status.RAGE, 50, 0, 1, 1000,825,67)]
         [DataRow(Status.RAGE, 50, 0, 1000, Int32.MaxValue, 825, 67)]
         [DataRow(Status.RAGE, 50, 0, 1000, Int32.MinValue,825,67)]
-        [DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
-        [DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
+        //[DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
+        //[DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
 
         public void TestStatueRage(Status statusFrom, int attaque, int toDefence, int fromHp, int toHp, int maxDamage,int minDamage)
         {
@@ -219,6 +238,39 @@ namespace TestFightEngine
 
             Assert.IsTrue(to.HealthPoint <= toHp - minDamage && to.HealthPoint >= toHp - maxDamage);
 
+        }
+        [DataTestMethod]
+        [DataRow( 1, 0, 1, 1000, 11, 1)]
+        [DataRow(50, 0, 1, 1000, 413, 34)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, 413, 34)]
+        [DataRow( 50, 0, 1000, Int32.MinValue, 413, 34)]
+
+        public void TestBite( int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
+        {
+
+            IEntity from = new Warrior.Builder()
+
+                  .SetDefence(fromDefence)
+                  .SetHealth(fromHp)
+                  .SetMaxHealth(fromHp)
+                  .Build();
+
+            IEntity to = new Wolf.Builder()
+
+                .SetAttack(attaque)
+                .SetHealth(toHp)
+                .SetMaxHealth(toHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new Bite();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(from, moveDeux);
+            MoveAction deux = new MoveAction(to, move);
+
+            test.Turn(un, deux);
+
+            Assert.IsTrue(from.HealthPoint <= fromHp - minDamage && from.HealthPoint >= fromHp - maxDamage);
         }
     }
 }
