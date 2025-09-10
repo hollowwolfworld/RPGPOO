@@ -166,7 +166,7 @@ namespace FightEngine
         /// <param name="status"></param>
         private void ApplyStatusDamage(IEntity entity, Status status)
         {
-            int hurt = 7 * entity.MaxHealthPoint / 100;
+            int hurt = 5 * entity.MaxHealthPoint / 100;
             entity.HealthPoint =- hurt;
         }
 

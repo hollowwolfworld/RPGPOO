@@ -131,12 +131,10 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(Status.BURN, null, 5, 6, 1000, 1, 0)]
-        [DataRow(null, Status.BURN, 5, 6, 1000, 1, 1)]
-        [DataRow(Status.BURN, null, 5, 6, 1, 1000, -1)]
-        [DataRow(null, Status.BURN, 5, 6, 1, 1000, 0)]
-        [DataRow(Status.BURN, Status.BURN, 5, 5, 1, 1000, 0)]
-        public void TestStatueBurn(Status statusFrom, Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
+        [DataRow(Status.BURN, null, 1000, 1, 50)]
+        [DataRow(null, Status.BURN, 1000, 1, 1)]
+        [DataRow(Status.BURN, Status.BURN, 1, 1000,50)]
+        public void TestStatueBurn(Status statusFrom, Status statusTo, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
             {
@@ -154,14 +152,14 @@ namespace TestFightEngine
             };
 
             IEntity from = new Warrior.Builder()
-              .SetSpeed(fromSpeed)
+              
               .SetHealth(fromHp)
               .SetMaxHealth(fromHp)
               .SetStatus(dicFrom)
               .Build();
 
             IEntity to = new Slime.Builder()
-                .SetSpeed(toSpeed)
+                
                 .SetHealth(toHp)
                 .SetMaxHealth(toHp)
                 .SetStatus(dicTo)
