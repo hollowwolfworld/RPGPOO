@@ -91,7 +91,7 @@ namespace FightEngine
                         {
                             RemovedStatus(entity, status.Key);
                         }
-                        break;
+                            break;
                     case Status.BURN:
                         entity.Status[status.Key] = status.Value - 1;
                         if (status.Value == 0)

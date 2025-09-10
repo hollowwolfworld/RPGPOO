@@ -175,6 +175,50 @@ namespace TestFightEngine
             Assert.IsTrue(expected == from.HealthPoint);
         }
 
+        [DataTestMethod]
+        [DataRow(Status.RAGE, 1,0, 1, 1000,22,1)]
+        [DataRow(Status.RAGE, 50, 0, 1, 1000,825,67)]
+        [DataRow(Status.RAGE, 50, 0, 1000, Int32.MaxValue, 825, 67)]
+        [DataRow(Status.RAGE, 50, 0, 1000, Int32.MinValue,825,67)]
+        [DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
+        [DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
 
+        public void TestStatueRage(Status statusFrom, int attaque, int toDefence, int fromHp, int toHp, int maxDamage,int minDamage)
+        {
+            var dicFrom = new Dictionary<Status, int>()
+            {
+                {
+                    statusFrom,
+                    2
+                },
+            };
+            
+
+            IEntity from = new Warrior.Builder()
+
+              .SetHealth(fromHp)
+              .SetMaxHealth(fromHp)
+              .SetStatus(dicFrom)
+              .SetAttack(attaque)
+              .Build();
+
+            IEntity to = new Slime.Builder()
+
+                .SetDefence(toDefence)
+                .SetHealth(toHp)
+                .SetMaxHealth(toHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new SimpleMove();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(to, move);
+            MoveAction deux = new MoveAction(from, moveDeux);
+
+            test.Turn(un, deux);
+
+            Assert.IsTrue(to.HealthPoint <= toHp - minDamage && to.HealthPoint >= toHp - maxDamage);
+
+        }
     }
 }
