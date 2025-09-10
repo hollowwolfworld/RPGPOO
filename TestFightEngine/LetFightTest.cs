@@ -131,9 +131,9 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(Status.BURN, null, 1000, 1, 50)]
+        [DataRow(Status.BURN, null, 1000, 1, 950)]
         [DataRow(null, Status.BURN, 1000, 1, 1)]
-        [DataRow(Status.BURN, Status.BURN, 1, 1000,50)]
+        [DataRow(Status.BURN, Status.BURN, 1, 1000,950)]
         public void TestStatueBurn(Status statusFrom, Status statusTo, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
@@ -169,6 +169,8 @@ namespace TestFightEngine
             Move move = new DoNothing();
             MoveAction un = new MoveAction(to, move);
             MoveAction deux = new MoveAction(from, move);
+
+            test.Turn(un, deux);
 
             Assert.IsTrue(expected == from.HealthPoint || expected == to.HealthPoint);
         }
