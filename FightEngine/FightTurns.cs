@@ -100,7 +100,7 @@ namespace FightEngine
                         }
                         else
                         {
-                            ApplyStatusDamage(entity, status.Key);
+                            ApplyStatusDamage(entity);
                         }
                         break;
                     case Status.POISONED:
@@ -111,7 +111,7 @@ namespace FightEngine
                         }
                         else
                         {
-                            ApplyStatusDamage(entity, status.Key);
+                            ApplyStatusDamage(entity);
                         }
                         break;
                 }
@@ -163,11 +163,10 @@ namespace FightEngine
         /// 
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="status"></param>
-        private void ApplyStatusDamage(IEntity entity, Status status)
+        private void ApplyStatusDamage(IEntity entity)
         {
-            int hurt = 5 * entity.MaxHealthPoint / 100;
-            entity.HealthPoint =- hurt;
+            int hurt = Convert.ToInt32(Math.Ceiling(5 * entity.MaxHealthPoint / 100.0));
+            entity.HealthPoint -= hurt;
         }
 
         /// <summary>
