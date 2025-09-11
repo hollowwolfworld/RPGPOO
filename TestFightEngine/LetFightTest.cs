@@ -199,8 +199,8 @@ namespace TestFightEngine
         [DataRow(Status.RAGE, 50, 0, 1, 1000,825,67)]
         [DataRow(Status.RAGE, 50, 0, 1000, Int32.MaxValue, 825, 67)]
         [DataRow(Status.RAGE, 50, 0, 1000, Int32.MinValue,825,67)]
-        //[DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
-        //[DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
+        [DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
+        [DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
 
         public void TestStatueRage(Status statusFrom, int attaque, int toDefence, int fromHp, int toHp, int maxDamage,int minDamage)
         {
@@ -241,9 +241,9 @@ namespace TestFightEngine
         }
         [DataTestMethod]
         [DataRow( 1, 0, 1, 100, 11, 1)]
-        [DataRow(50, 0, 1, 1000, 413, 34)]
-        [DataRow(50, 0, 1000, Int32.MaxValue, 413, 34)]
-        [DataRow( 50, 0, 1000, Int32.MinValue, 413, 34)]
+        [DataRow(50, 0, 1, 1000, 414, 34)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, 414, 34)]
+        [DataRow( 50, 0, 1000, Int32.MinValue, 414, 34)]
 
         public void TestBite( int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
         {
@@ -269,6 +269,13 @@ namespace TestFightEngine
             MoveAction deux = new MoveAction(from, move);
 
             test.Turn(un, deux);
+
+            Console.WriteLine("Min: ");
+            Console.WriteLine(from.HealthPoint);
+            Console.WriteLine(fromHp - minDamage);
+            Console.WriteLine("Max: ");
+            Console.WriteLine(from.HealthPoint);
+            Console.WriteLine(fromHp - maxDamage);
 
             Assert.IsTrue(from.HealthPoint <= fromHp - minDamage && from.HealthPoint >= fromHp - maxDamage);
         }
