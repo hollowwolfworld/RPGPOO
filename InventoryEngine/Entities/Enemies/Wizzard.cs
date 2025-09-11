@@ -26,7 +26,7 @@ namespace EntityEngine.Entities.Enemies
         private int gold;
         private Inventory inventory;
 
-        public Wizzard(string name, int maxHp, int hp, int maxMp, int mp, int attack, int defence, int speed, int levels, int luck, int gold, List<ISkill> skills, Dictionary<Status, int> status, Inventory inventory)
+        public Wizzard(string name, int levels, int maxHp, int hp, int maxMp, int mp, int attack, int defence, int speed, int luck, int gold, List<ISkill> skills, Dictionary<Status, int> status, Inventory inventory)
         {
             this.name = name;
             this.maxHp = maxHp;

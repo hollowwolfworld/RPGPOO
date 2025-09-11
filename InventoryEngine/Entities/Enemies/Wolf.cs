@@ -16,7 +16,7 @@ namespace EntityEngine.Entities.Enemies
         private string name;
         private int luck;
 
-        public Wolf(string name, int maxHp, int hp, int attack, int defence, int speed, int levels, int luck, List<ISkill> skills, Dictionary<Status, int> status)
+        public Wolf(string name, int levels, int maxHp, int hp, int attack, int defence, int speed, int luck, List<ISkill> skills, Dictionary<Status, int> status)
         {
             this.name = name;
             this.maxHp = maxHp;

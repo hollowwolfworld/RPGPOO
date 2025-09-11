@@ -240,7 +240,7 @@ namespace TestFightEngine
 
         }
         [DataTestMethod]
-        [DataRow( 1, 0, 1, 1000, 11, 1)]
+        [DataRow( 1, 0, 1, 100, 11, 1)]
         [DataRow(50, 0, 1, 1000, 413, 34)]
         [DataRow(50, 0, 1000, Int32.MaxValue, 413, 34)]
         [DataRow( 50, 0, 1000, Int32.MinValue, 413, 34)]
