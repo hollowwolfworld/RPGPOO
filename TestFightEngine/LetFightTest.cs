@@ -265,8 +265,8 @@ namespace TestFightEngine
             FightTurns test = new FightTurns(from, to);
             Move move = new Bite();
             Move moveDeux = new DoNothing();
-            MoveAction un = new MoveAction(from, moveDeux);
-            MoveAction deux = new MoveAction(to, move);
+            MoveAction un = new MoveAction(to, moveDeux);
+            MoveAction deux = new MoveAction(from, move);
 
             test.Turn(un, deux);
 
