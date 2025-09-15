@@ -10,6 +10,6 @@ namespace EntityEngine.Entities
     public interface IHumanoid
     {
         public Inventory Inventory { get; }
-        public int Gold { get; set; }
+        public decimal Gold { get; set; }
     }
 }

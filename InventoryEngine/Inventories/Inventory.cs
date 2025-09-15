@@ -151,6 +151,8 @@ namespace EntityEngine.Inventories
             return ((IReadOnlyDictionary<Item, int>)Items).ContainsKey(key);
         }
 
+        public bool ContainsItem(string name) => Items.Select((item, index) => item.Key.Name == name).Count() >= 1;
+
         public bool TryGetValue(Item key, [MaybeNullWhen(false)] out int value)
         {
             return ((IReadOnlyDictionary<Item, int>)Items).TryGetValue(key, out value);
