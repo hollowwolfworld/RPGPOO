@@ -14,7 +14,7 @@ namespace FightEngine.Skills
         {
             if(from is not IMagical mage) throw new NotAllowedToUseSkill();
 
-            int damage = DamageCalculator.CalculateDamage(7, from.Chance, to.Defence);
+            int damage = DamageCalculator.CalculateDamage(7, from.Luck, to.Defence);
             to.HealthPoint -= damage;
             to.Status[Status.BURN] = 3;
             mage.ManaPoint -= 3;//a equilibrer 

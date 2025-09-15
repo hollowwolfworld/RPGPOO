@@ -141,7 +141,18 @@ namespace FightEngine
                     Arena.Hit(user, move.Target);
                     break;
                 case Flee flee:
-                    if (!CanFlee(user.Luck, user.Speed, move.Target.Speed)) return -1;
+                    if (user.Speed > flee.Opponent.Speed)
+                    {
+                        return -1;
+                    }
+
+                    Random rand = new Random();
+                    int luckFlee = rand.Next(1, 101);
+
+                    if (luckFlee <= Arena.FirstFighter.Luck)
+                    {
+                        return -1;
+                    }
                     break;
             }
 

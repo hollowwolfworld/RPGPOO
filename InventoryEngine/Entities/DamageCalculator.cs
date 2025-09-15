@@ -19,7 +19,7 @@ namespace EntityEngine.Entities
             {
                 rageBoost = 1.5;
             }
-            return CalculateDamage(Convert.ToInt32(Math.Round(from.Attack * rageBoost)), from.Chance, to.Defence);
+            return CalculateDamage(Convert.ToInt32(Math.Round(from.Attack * rageBoost)), from.Luck, to.Defence);
         }
 
         /// <summary>
