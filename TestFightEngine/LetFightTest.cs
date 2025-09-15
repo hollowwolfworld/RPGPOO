@@ -278,6 +278,20 @@ namespace TestFightEngine
             Console.WriteLine(fromHp - maxDamage);
 
             Assert.IsTrue(from.HealthPoint <= fromHp - minDamage && from.HealthPoint >= fromHp - maxDamage);
+
+
+
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 0, 1, 100, 11, 1)]
+        [DataRow(50, 0, 1, 1000, 414, 34)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, 414, 34)]
+        [DataRow(50, 0, 1000, Int32.MinValue, 414, 34)]
+
+        public void TestDrainPV(int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
+        {
+
         }
     }
 }
