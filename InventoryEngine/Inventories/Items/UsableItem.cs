@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace EntityEngine.Inventories.Items
 {
-    public abstract class UsableItem: Item
+    public abstract class UsableItem: Item, Move
     {
         protected UsableItem(string name, string description) : base(name, description)
         {
         }
 
-        public abstract void Use(IEntity entity);
+        public abstract void Use(IEntity on);
     }
 }

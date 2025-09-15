@@ -21,5 +21,11 @@ namespace EntityEngine.Inventories.Items
         {
             return Name;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Item item &&
+                   Name == item.Name;
+        }
     }
 }

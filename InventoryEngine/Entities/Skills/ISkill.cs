@@ -1,4 +1,5 @@
-﻿using EntityEngine.Entities;
+﻿using EntityEngine;
+using EntityEngine.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FightEngine.Skills
 {
-    public interface ISkill
+    public interface ISkill : Move
     {
         public void UseSkill(IEntity from, IEntity to);
     }

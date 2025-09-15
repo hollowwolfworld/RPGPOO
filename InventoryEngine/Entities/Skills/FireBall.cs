@@ -1,4 +1,5 @@
 ﻿using EntityEngine.Entities;
+using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace FightEngine.Skills
     {
         public void UseSkill(IEntity from, IEntity to)
         {
-            throw new NotImplementedException();
+            if(from is not IMagical mage) throw new NotAllowedToUseSkill();
+
+            int damage = DamageCalculator.CalculateDamage(7, from.Luck, to.Defence);
+            to.HealthPoint -= damage;
+            to.Status[Status.BURN] = 3;
+            mage.ManaPoint -= 3;//a equilibrer 
         }
     }
 }
