@@ -30,7 +30,10 @@ namespace FightEngine
 
             var damage = DamageCalculator.CalculateDamage(striker, target);
 
-            target.HealthPoint -= damage;
+            if (damage > target.HealthPoint)
+            { target.HealthPoint = 0; }
+            else
+                target.HealthPoint -= damage;
         }
 
         public void UseSkill(IEntity striker, IEntity target, ISkill skill)

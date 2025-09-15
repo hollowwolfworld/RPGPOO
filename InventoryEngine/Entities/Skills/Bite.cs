@@ -25,8 +25,14 @@ namespace FightEngine.Skills
                 damage = Math.Max(1, Math.Floor(damage));
 
                 int d = Convert.ToInt32(damage);
-
-                to.HealthPoint -= d;
+                if (d > to.HealthPoint)
+                {
+                    to.HealthPoint = 0;
+                }
+                else
+                {
+                    to.HealthPoint -= d;
+                }
 
             } else if (to is Sorcerer)
             {
@@ -36,10 +42,28 @@ namespace FightEngine.Skills
 
                 int d = Convert.ToInt32(damage);
 
-                to.HealthPoint -= d;
+                if (d > to.HealthPoint)
+                {
+                    to.HealthPoint = 0;
+                }
+                else
+                {
+                    to.HealthPoint -= d;
+                }
             }
+            else
+            {
+                int d = Convert.ToInt32(damage);
 
-            to.HealthPoint -= Convert.ToInt32(damage);
+                if (d > to.HealthPoint)
+                {
+                    to.HealthPoint = 0;
+                }
+                else
+                {
+                    to.HealthPoint -= d;
+                }
+            }
         }
     }
 }

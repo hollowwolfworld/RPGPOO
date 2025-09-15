@@ -5,6 +5,7 @@ using EntityEngine.Entities.Players;
 using System.Security.Cryptography;
 using EntityEngine;
 using FightEngine.Skills;
+using EntityEngine.Entities.Skills;
 
 namespace TestFightEngine
 {
@@ -12,6 +13,7 @@ namespace TestFightEngine
     public sealed class LetFightTest
     {
         [DataTestMethod]
+        [DataRow(5, 50, 0, 0, 4, 50)]
         [DataRow(5, 50, 0, 12, 1, 1)]
         [DataRow(7, 45, 100, 6, 3, 4)]
         [DataRow(7, 45, 0, 6, 3, 44)]
@@ -241,9 +243,9 @@ namespace TestFightEngine
         }
         [DataTestMethod]
         [DataRow( 1, 0, 1, 100, 11, 1)]
-        [DataRow(50, 0, 1, 1000, 414, 34)]
-        [DataRow(50, 0, 1000, Int32.MaxValue, 414, 34)]
-        [DataRow( 50, 0, 1000, Int32.MinValue, 414, 34)]
+        [DataRow(50, 0, 1, 1000, 270, 0)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, 270, 22)]
+        [DataRow( 50, 0, 1000, Int32.MinValue, 270, 22)]
 
         public void TestBite( int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
         {
@@ -278,6 +280,42 @@ namespace TestFightEngine
             Console.WriteLine(fromHp - maxDamage);
 
             Assert.IsTrue(from.HealthPoint <= fromHp - minDamage && from.HealthPoint >= fromHp - maxDamage);
+
+
+
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 0, 1, 100)]
+        [DataRow(50, 0, 1, 1000)]
+        [DataRow(50, 0, 1000, Int32.MaxValue)]
+        [DataRow(50, 0, 1000, Int32.MinValue)]
+
+        public void TestDrainPV(int attaque, int fromDefence, int fromHp, int toHp)
+        {
+            IEntity from = new Warrior.Builder()
+
+                 .SetDefence(fromDefence)
+                 .SetHealth(fromHp)
+                 .SetMaxHealth(fromHp)
+                 .Build();
+
+            IEntity to = new Slime.Builder()
+
+                .SetAttack(attaque)
+                .SetHealth(toHp)
+                .SetMaxHealth(toHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new DrainPV();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(to, moveDeux);
+            MoveAction deux = new MoveAction(from, move);
+
+            test.Turn(un, deux);
+
+            Assert.IsTrue(fromHp == from.HealthPoint - 5 &&  toHp == to.HealthPoint + 5);
         }
     }
 }
