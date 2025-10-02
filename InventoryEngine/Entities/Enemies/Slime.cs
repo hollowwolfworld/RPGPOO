@@ -71,8 +71,8 @@ namespace EntityEngine.Entities.Enemies
             get => mp;
             set
             {
-                if (value <= maxMp) hp = value;
-                else hp = maxMp;
+                if (value <= maxMp) mp = value;
+                else mp = maxMp;
             }
         }
         string IEntity.Name { get => name; }

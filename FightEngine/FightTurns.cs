@@ -36,7 +36,7 @@ namespace FightEngine
         /// <return>-1 si le fighter1 à perdu, 1 si figther 2 à perdu, 0 si le combat n'est pas fini</return>
         public int Turn(MoveAction moveF1, MoveAction moveF2)
         {
-            if (Arena.FirstFighter.Speed >= Arena.SecondFighter.Speed)
+            if (Arena.FirstFighter.Speed >= Arena.SecondFighter.Speed )
             {
                 var moveResult = MakeMove(Arena.FirstFighter, moveF1);
                 
@@ -46,7 +46,7 @@ namespace FightEngine
 
                 if (moveResult != 0) return moveResult;
             }
-            else
+            else 
             {
                 var moveResult = MakeMove(Arena.SecondFighter, moveF2);
 

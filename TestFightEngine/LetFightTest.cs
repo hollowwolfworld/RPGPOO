@@ -34,7 +34,7 @@ namespace TestFightEngine
 
             int toHp = to.HealthPoint;
 
-            test.Hit(from,to);
+            test.Hit(from, to);
 
             Assert.IsTrue(to.HealthPoint <= toHp - minDamage && to.HealthPoint >= toHp - maxDamage);
         }
@@ -46,12 +46,12 @@ namespace TestFightEngine
 
         [DataRow(5, 6, 1000, 1, 1)]
 
-        [DataRow(5, 4 , 1, 1, 1)]
+        [DataRow(5, 4, 1, 1, 1)]
 
         [DataRow(5, 4, 1, 1000, -1)]
 
-        [DataRow(5, 5 ,1, 1, 1)]
-        
+        [DataRow(5, 5, 1, 1, 1)]
+
         [DataRow(Int32.MaxValue, Int32.MaxValue, 1, 1, 1)]
 
         [DataRow(5, Int32.MaxValue, 1, 1, -1)]
@@ -69,7 +69,7 @@ namespace TestFightEngine
 
 
 
-        public void Testspeed(int fromSpeed, int toSpeed,int fromHp, int  toHp, int expected)
+        public void Testspeed(int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
         {
             IEntity to = new Slime.Builder()
                .SetSpeed(toSpeed)
@@ -102,14 +102,14 @@ namespace TestFightEngine
         [DataRow(Status.PARALYSED, null, 5, 4, 1, 1000, -1)]
         [DataRow(null, Status.PARALYSED, 5, 4, 1, 1000, 0)]
 
-        [DataRow(Status.PARALYSED, null, 5, 5, 1000, 1,  0)]
+        [DataRow(Status.PARALYSED, null, 5, 5, 1000, 1, 0)]
         [DataRow(null, Status.PARALYSED, 5, 5, 1000, 1, 1)]
         [DataRow(Status.PARALYSED, null, 5, 5, 1, 1000, -1)]
         [DataRow(null, Status.PARALYSED, 5, 5, 1, 1000, 0)]
         [DataRow(Status.PARALYSED, Status.PARALYSED, 5, 5, 1, 1000, 0)]
 
 
-        public void TestStatuePara(Status statusFrom,Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
+        public void TestStatuePara(Status statusFrom, Status statusTo, int fromSpeed, int toSpeed, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
             {
@@ -154,7 +154,7 @@ namespace TestFightEngine
         [DataTestMethod]
         [DataRow(Status.BURN, null, 1000, 1, 950)]
         [DataRow(null, Status.BURN, 1000, 1, 1000)]
-        [DataRow(Status.BURN, Status.BURN, 1, 1000,0)]
+        [DataRow(Status.BURN, Status.BURN, 1, 1000, 0)]
         public void TestStatueBurn(Status statusFrom, Status statusTo, int fromHp, int toHp, int expected)
         {
             var dicFrom = new Dictionary<Status, int>()
@@ -173,14 +173,14 @@ namespace TestFightEngine
             };
 
             IEntity from = new Warrior.Builder()
-              
+
               .SetHealth(fromHp)
               .SetMaxHealth(fromHp)
               .SetStatus(dicFrom)
               .Build();
 
             IEntity to = new Slime.Builder()
-                
+
                 .SetHealth(toHp)
                 .SetMaxHealth(toHp)
                 .SetStatus(dicTo)
@@ -197,14 +197,11 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(Status.RAGE, 1,0, 1, 1000,22,1)]
-        [DataRow(Status.RAGE, 50, 0, 1, 1000,825,67)]
-        [DataRow(Status.RAGE, 50, 0, 1000, Int32.MaxValue, 825, 67)]
-        [DataRow(Status.RAGE, 50, 0, 1000, Int32.MinValue,825,67)]
-        [DataRow(Status.RAGE,  Int32.MaxValue,0,1, 1000, 100,2)]
-        [DataRow(Status.RAGE,  Int32.MinValue,0, 1, 1000, 100,2)]
+        [DataRow(Status.RAGE, 1, 0, 1, 1000, 22, 1)]
+        [DataRow(Status.RAGE, 50, 0, 1, 1000, 825, 67)]
 
-        public void TestStatueRage(Status statusFrom, int attaque, int toDefence, int fromHp, int toHp, int maxDamage,int minDamage)
+
+        public void TestStatueRage(Status statusFrom, int attaque, int toDefence, int fromHp, int toHp, int maxDamage, int minDamage)
         {
             var dicFrom = new Dictionary<Status, int>()
             {
@@ -213,7 +210,7 @@ namespace TestFightEngine
                     2
                 },
             };
-            
+
 
             IEntity from = new Warrior.Builder()
 
@@ -242,12 +239,12 @@ namespace TestFightEngine
 
         }
         [DataTestMethod]
-        [DataRow( 1, 0, 1, 100, 11, 1)]
-        [DataRow(50, 0, 1, 1000, 270, 0)]
-        [DataRow(50, 0, 1000, Int32.MaxValue, 270, 22)]
-        [DataRow( 50, 0, 1000, Int32.MinValue, 270, 22)]
+        [DataRow(1, 0, 1, 100, 11, 1)]
+        [DataRow(50, 0, 1, 1000, 275, 0)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, 275, 22)]
+        [DataRow(50, 0, 1000, Int32.MinValue, 275, 22)]
 
-        public void TestBite( int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
+        public void TestBite(int attaque, int fromDefence, int fromHp, int toHp, int maxDamage, int minDamage)
         {
 
             IEntity from = new Warrior.Builder()
@@ -286,25 +283,24 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(1, 0, 1, 100)]
-        [DataRow(50, 0, 1, 1000)]
-        [DataRow(50, 0, 1000, Int32.MaxValue)]
-        [DataRow(50, 0, 1000, Int32.MinValue)]
+        [DataRow(1, 0, 1, 100, 95)]
+        [DataRow(50, 0, 1, 1000, 995)]
+        [DataRow(50, 0, 1000, Int32.MaxValue, Int32.MaxValue)]
 
-        public void TestDrainPV(int attaque, int fromDefence, int fromHp, int toHp)
+        public void TestDrainPV(int attaque, int fromDefence, int maxfromHp, int maxtoHp, int toHP)
         {
             IEntity from = new Warrior.Builder()
 
                  .SetDefence(fromDefence)
-                 .SetHealth(fromHp)
-                 .SetMaxHealth(fromHp)
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(maxfromHp)
                  .Build();
 
             IEntity to = new Slime.Builder()
 
                 .SetAttack(attaque)
-                .SetHealth(toHp)
-                .SetMaxHealth(toHp)
+                .SetHealth(toHP)
+                .SetMaxHealth(maxtoHp)
                 .Build();
 
             FightTurns test = new FightTurns(from, to);
@@ -315,7 +311,41 @@ namespace TestFightEngine
 
             test.Turn(un, deux);
 
-            Assert.IsTrue(fromHp == from.HealthPoint - 5 &&  toHp == to.HealthPoint + 5);
+            Assert.IsTrue(from.HealthPoint == maxfromHp - 5 && to.HealthPoint == toHP + 5);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 3, 1, 100, 95, 30, 2)]
+        [DataRow(50, 3, 1, 1000, 995, 30, 2)]
+        [DataRow(50, 3, 1000, Int32.MaxValue, Int32.MaxValue, 30, 2)]
+
+        public void TestFireBall(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
+        {
+            IEntity from = new Sorcerer.Builder()
+
+
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(maxfromHp)
+                 .Build();
+
+            IEntity to = new Slime.Builder()
+
+                .SetDefence(toDefence)
+                .SetAttack(attaque)
+                .SetHealth(toHP)
+                .SetMaxHealth(maxtoHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new FireBall();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(from, moveDeux);
+            MoveAction deux = new MoveAction(to, move);
+
+            test.Turn(un, deux);
+
+            Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);
+            Console.WriteLine("h");
         }
     }
 }
