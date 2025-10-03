@@ -335,8 +335,7 @@ namespace TestFightEngine
                 .SetHealth(toHP)
                 .SetMaxHealth(maxtoHp)
                 .Build();
-            try
-            {
+
                 FightTurns test = new FightTurns(from, to);
                 Move move = new FireBall();
                 Move moveDeux = new DoNothing();
@@ -345,14 +344,39 @@ namespace TestFightEngine
 
                 test.Turn(deux, un);
 
-                Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                Assert.Fail();
-            }
-            
+                Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);    
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 4, 100, 100, 90)]
+        [DataRow(50, 4, 1000, 1000, 500)]
+
+        public void TestHeal(int attaque, int toDefence, int maxfromHp, int maxtoHp, int fromHP)
+        {
+            IEntity from = new Sorcerer.Builder()
+
+
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(fromHP)
+                 .Build();
+
+            IEntity to = new Slime.Builder()
+
+                .SetDefence(toDefence)
+                .SetAttack(attaque)
+                .SetMaxHealth(maxtoHp)
+                .SetHealth(maxtoHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new Heal();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(from, moveDeux);
+            MoveAction deux = new MoveAction(from, move);
+
+            test.Turn(deux, un);
+
+            Assert.IsTrue();
         }
     }
 }
