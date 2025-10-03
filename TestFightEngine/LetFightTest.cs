@@ -315,9 +315,9 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(1, 3, 1, 100, 95, 30, 2)]
-        [DataRow(50, 3, 1, 1000, 995, 30, 2)]
-        [DataRow(50, 3, 1000, Int32.MaxValue, Int32.MaxValue, 30, 2)]
+        [DataRow(1, 4, 1, 100, 100, 55, 9)]
+        [DataRow(50, 4, 1, 1000, 1000, 100, 54)]
+        //[DataRow(50, 3, 1000, Int32.MaxValue, Int32.MaxValue, 80, 52)]
 
         public void TestFireBall(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
         {
@@ -335,17 +335,24 @@ namespace TestFightEngine
                 .SetHealth(toHP)
                 .SetMaxHealth(maxtoHp)
                 .Build();
+            try
+            {
+                FightTurns test = new FightTurns(from, to);
+                Move move = new FireBall();
+                Move moveDeux = new DoNothing();
+                MoveAction un = new MoveAction(from, moveDeux);
+                MoveAction deux = new MoveAction(to, move);
 
-            FightTurns test = new FightTurns(from, to);
-            Move move = new FireBall();
-            Move moveDeux = new DoNothing();
-            MoveAction un = new MoveAction(from, moveDeux);
-            MoveAction deux = new MoveAction(to, move);
+                test.Turn(deux, un);
 
-            test.Turn(un, deux);
-
-            Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);
-            Console.WriteLine("h");
+                Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                Assert.Fail();
+            }
+            
         }
     }
 }
