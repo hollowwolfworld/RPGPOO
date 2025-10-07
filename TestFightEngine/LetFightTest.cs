@@ -349,6 +349,7 @@ namespace TestFightEngine
 
         [DataTestMethod]
         [DataRow(1, 4, 100, 100, 90)]
+        [DataRow(50, 4, 1000, 1000, 999)]
         [DataRow(50, 4, 1000, 1000, 500)]
 
         public void TestHeal(int attaque, int toDefence, int maxfromHp, int maxtoHp, int fromHP)
@@ -376,7 +377,7 @@ namespace TestFightEngine
 
             test.Turn(deux, un);
 
-            Assert.IsTrue();
+            Assert.IsTrue(from.HealthPoint == fromHP + 10 || from.HealthPoint == maxfromHp);
         }
     }
 }

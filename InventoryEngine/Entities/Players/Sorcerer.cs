@@ -104,8 +104,8 @@ namespace EntityEngine.Entities.Players
         int IMagical.ManaPoint { get => mp;
             set
             {
-                if (value <= maxMp) hp = value;
-                else hp = maxMp;
+                if (value <= maxMp) mp = value;
+                else mp = maxMp;
             }
         }
         int IEntity.Speed { get => speed; set => speed = value; }
