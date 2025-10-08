@@ -379,5 +379,39 @@ namespace TestFightEngine
 
             Assert.IsTrue(from.HealthPoint == fromHP + 10 || from.HealthPoint == maxfromHp);
         }
+
+
+        [DataTestMethod]
+        [DataRow(5, 100, 1000, 100, 1000,0,50,4)]
+        [DataRow(5, 200, 1000, 1000, 1000,0,100,8)]
+        [DataRow(5, 300, 1000, 1000, 1000,0,150,12)]
+
+        public void testRacket(int attaque, int money, int maxfromHp, int maxtoHp, int fromHP, int fromdef, int maxDamage, int minDamage)
+        {
+            IEntity from = new Sorcerer.Builder()
+
+                 .SetGold(money)
+                 .SetDefence(fromdef)
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(fromHP)
+                 .Build();
+
+            IEntity to = new Thugs.Builder()
+
+                .SetAttack(attaque)
+                .SetMaxHealth(maxtoHp)
+                .SetHealth(maxtoHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new Racket();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(to, moveDeux);
+            MoveAction deux = new MoveAction(from, move);
+
+            test.Turn(un, deux);
+
+            Assert.IsTrue(from.HealthPoint <= fromHP - minDamage && from.HealthPoint >= fromHP - maxDamage);
+        }
     }
 }

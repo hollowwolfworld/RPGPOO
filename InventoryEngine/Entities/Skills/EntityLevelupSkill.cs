@@ -66,7 +66,7 @@ namespace EntityEngine.Entities.Skills
                     typeof(Thugs).ToString(),
                     new List<SkillLevel>()
                     {
-
+                        new SkillLevel(1, new Racket())
                     }
                 },
                 {
