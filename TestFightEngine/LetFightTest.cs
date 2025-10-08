@@ -413,5 +413,36 @@ namespace TestFightEngine
 
             Assert.IsTrue(from.HealthPoint <= fromHP - minDamage && from.HealthPoint >= fromHP - maxDamage);
         }
+
+        [DataTestMethod]
+        [DataRow(7, 0, 100, 100, 100, 55, 9)]
+        [DataRow(7, 0, 100, 1000, 1000, 100, 54)]
+        public void Testshootanarrow(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
+        {
+            IEntity from = new Sorcerer.Builder()
+
+                 .SetDefence(toDefence)
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(maxfromHp)
+                 .Build();
+
+            IEntity to = new Skeleton.Builder()
+
+                .SetDefence(toDefence)
+                .SetAttack(attaque)
+                .SetHealth(toHP)
+                .SetMaxHealth(maxtoHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new ShootAnArrow();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(to, moveDeux);
+            MoveAction deux = new MoveAction(from, move);
+
+            test.Turn(un,deux);
+
+            Assert.IsTrue(from.HealthPoint <= maxfromHp - minDamage && from.HealthPoint >= maxfromHp - maxDamage);
+        }
     }
 }

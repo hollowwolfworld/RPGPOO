@@ -14,7 +14,7 @@ namespace FightEngine.Skills
         public void UseSkill(IEntity from, IEntity to)
         {
             if(from is not Skeleton) throw new NotAllowedToUseSkill();
-            DamageCalculator.CalculateDamage(from, to);
+            to.HealthPoint -= DamageCalculator.CalculateDamage(from, to);
             to.Status[Status.POISONED] = 3;
         }
     }
