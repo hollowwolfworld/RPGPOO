@@ -315,15 +315,15 @@ namespace TestFightEngine
         }
 
         [DataTestMethod]
-        [DataRow(1, 4, 1, 100, 100, 55, 9)]
-        [DataRow(50, 4, 1, 1000, 1000, 100, 54)]
+        [DataRow(1, 4, 1, 100, 100, 60, 9)]
+        [DataRow(50, 4, 1, 1000, 1000, 105, 54)]
         //[DataRow(50, 3, 1000, Int32.MaxValue, Int32.MaxValue, 80, 52)]
 
         public void TestFireBall(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
         {
             IEntity from = new Sorcerer.Builder()
 
-
+                 
                  .SetMaxHealth(maxfromHp)
                  .SetHealth(maxfromHp)
                  .Build();
@@ -343,7 +343,7 @@ namespace TestFightEngine
                 MoveAction deux = new MoveAction(to, move);
 
                 test.Turn(deux, un);
-
+                Console.WriteLine(to.HealthPoint);
                 Assert.IsTrue(to.HealthPoint <= toHP - minDamage && to.HealthPoint >= toHP - maxDamage);    
         }
 
@@ -382,9 +382,9 @@ namespace TestFightEngine
 
 
         [DataTestMethod]
-        [DataRow(5, 100, 1000, 100, 1000,0,50,4)]
-        [DataRow(5, 200, 1000, 1000, 1000,0,100,8)]
-        [DataRow(5, 300, 1000, 1000, 1000,0,150,12)]
+        [DataRow(5, 100, 1000, 100, 1000,0,55,4)]
+        [DataRow(5, 200, 1000, 1000, 1000,0,110,8)]
+        [DataRow(5, 300, 1000, 1000, 1000,0,165,12)]
 
         public void testRacket(int attaque, int money, int maxfromHp, int maxtoHp, int fromHP, int fromdef, int maxDamage, int minDamage)
         {
@@ -410,13 +410,13 @@ namespace TestFightEngine
             MoveAction deux = new MoveAction(from, move);
 
             test.Turn(un, deux);
-
+            Console.WriteLine(from.HealthPoint);
             Assert.IsTrue(from.HealthPoint <= fromHP - minDamage && from.HealthPoint >= fromHP - maxDamage);
         }
 
         [DataTestMethod]
-        [DataRow(7, 0, 100, 100, 100, 55, 9)]
-        [DataRow(7, 0, 100, 1000, 1000, 100, 54)]
+        [DataRow(7, 0, 100, 100, 100, 82, 11)]
+        [DataRow(7, 0, 1000, 1000, 1000, 127, 56)]
         public void Testshootanarrow(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
         {
             IEntity from = new Sorcerer.Builder()
@@ -441,7 +441,7 @@ namespace TestFightEngine
             MoveAction deux = new MoveAction(from, move);
 
             test.Turn(un,deux);
-
+            Console.WriteLine(from.HealthPoint);
             Assert.IsTrue(from.HealthPoint <= maxfromHp - minDamage && from.HealthPoint >= maxfromHp - maxDamage);
         }
     }

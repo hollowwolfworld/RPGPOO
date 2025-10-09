@@ -32,9 +32,12 @@ namespace EntityEngine.Entities
         public static int CalculateDamage(int damage, int chance, int defence)
         {
             int _base = damage - defence / 2;
+          
             var rand = new Random();
             //double variance = _base * 10 / 10.0;
             double variance = _base * rand.Next(9, 12) / 10.0;
+
+            
 
             int luck = 10 + chance;
             int luckCrit = rand.Next(0, 101);
@@ -42,6 +45,8 @@ namespace EntityEngine.Entities
             double result = variance * (luckCrit <= luck ? GetDamageCritMultiplier(Math.Min(100, chance)) : 1);
 
             result = Math.Max(1, Math.Floor(result));
+
+            
 
             return Convert.ToInt32(result);
         }

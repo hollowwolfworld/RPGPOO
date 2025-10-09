@@ -18,6 +18,7 @@ namespace EntityEngine.Entities.Skills
 
             int damage = from.Attack * victim.Gold / 100 ;
 
+
             to.HealthPoint -= DamageCalculator.CalculateDamage(damage,from.Luck,to.Defence);
         }
     }
