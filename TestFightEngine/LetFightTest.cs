@@ -444,5 +444,37 @@ namespace TestFightEngine
             Console.WriteLine(from.HealthPoint);
             Assert.IsTrue(from.HealthPoint <= maxfromHp - minDamage && from.HealthPoint >= maxfromHp - maxDamage);
         }
+
+        [DataTestMethod]
+        [DataRow(7, 5, 100, 100, 100, 77, 6)]
+        [DataRow(7, 10, 1000, 1000, 1000, 77, 6)]
+        public void testneakAttack(int attaque, int toDefence, int maxfromHp, int maxtoHp, int toHP, int maxDamage, int minDamage)
+        {
+            IEntity from = new Thieft.Builder()
+
+                 .SetDefence(toDefence)
+                 .SetMaxHealth(maxfromHp)
+                 .SetHealth(maxfromHp)
+                 .Build();
+
+            IEntity to = new Skeleton.Builder()
+
+                .SetDefence(toDefence)
+                .SetAttack(attaque)
+                .SetHealth(toHP)
+                .SetMaxHealth(maxtoHp)
+                .Build();
+
+            FightTurns test = new FightTurns(from, to);
+            Move move = new SneakAttack();
+            Move moveDeux = new DoNothing();
+            MoveAction un = new MoveAction(from, moveDeux);
+            MoveAction deux = new MoveAction(to, move);
+
+            test.Turn(deux, un);
+            Console.WriteLine(from.HealthPoint);
+            Assert.IsTrue(to.HealthPoint <= maxtoHp - minDamage && to.HealthPoint >= maxtoHp - maxDamage);
+        }
+
     }
 }
