@@ -26,3 +26,5 @@ namespace RPGPOOTest
         }
     }
 }
+
+// ceci est un test
