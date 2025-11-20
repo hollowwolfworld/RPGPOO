@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntityEngine.Entities.Players;
+﻿using EntityEngine.Entities.Players;
+using EntityEngine.Exceptions;
 using EntityEngine.Inventories.Items;
 using RPGPOO.Exceptions;
 
@@ -11,7 +7,7 @@ namespace RPGPOO.Buildings
 {
     public class Shop
     {
-        public List<Product> Stock { get; set; }
+        private List<Product> Stock { get; set; }
 
         /// <summary>
         /// Création d'une boutique avec un stock déjà existant
@@ -35,16 +31,16 @@ namespace RPGPOO.Buildings
         /// <param name="product">L'article à ajouter</param>
         public void AddStock(Product product)
         {
-            
+            Stock.Add(product);
         }
 
         /// <summary>
         /// Retourne le stock de la boutique
         /// </summary>
         /// <returns>Stock de la boutique</returns>
-        public List<Product> GetStock()
+        public IReadOnlyList<Product> GetStock()
         {
-            throw new NotImplementedException();
+            return Stock;
         }
 
         /// <summary>
@@ -52,10 +48,18 @@ namespace RPGPOO.Buildings
         /// </summary>
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui achète l'article</param>
-        /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void BuyArticle(string name, IPlayer player)
+        /// <exception cref="ProductNotFoundException">Si aucun article n'as pas name comme nom</exception>
+        /// <exception cref="NotEnoughtGoldException">Si le joueur n'as pas assez d'argent pour acheter cette article</exception>
+        public void BuyArticle(string name, IPlayer player, int quantity)
         {
+            var article = Stock.Find(x => x.item.Name == name);
 
+            if (article == null) throw new ProductNotFoundException(name);
+
+            if(article.Price * quantity > player.Gold) throw new NotEnoughtGoldException($"{article.Price * quantity} > {player.Gold}");
+
+            player.Inventory.AddItem(article.item, quantity);
+            player.Gold -= article.Price * quantity;
         }
 
         /// <summary>
@@ -64,9 +68,20 @@ namespace RPGPOO.Buildings
         /// <param name="name">Le nom éxacte de l'article</param>
         /// <param name="player">Le joueur qui vend l'article</param>
         /// <exception cref="ProductNotFoundException">Si aucun article n'as ceci pour nom</exception>
-        public void SellArticle(string nom, IPlayer player)
+        public void SellArticle(string name, IPlayer player, int quantity)
         {
+            var article = Stock.Find(x => x.item.Name == name);
 
+            if (article == null) throw new ProductNotFoundException(name);
+
+            var item = player.Inventory.GetItemByName(name);
+
+            if(item == null) throw new ProductNotFoundException(name);
+
+            if(player.Inventory[item] < quantity) throw new NotEnoughtItem(name);
+
+            player.Inventory.RemoveItem(item, quantity);
+            player.Gold += article.Price * quantity;
         }
 
         /// <summary>
@@ -74,9 +89,6 @@ namespace RPGPOO.Buildings
         /// </summary>
         /// <param name="name">Le nom de l'article</param>
         /// <returns>La liste d'article contenant dans leur nom le nom rechercher</returns>
-        public List<Product> SearchArticle(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public List<Product> SearchArticle(string name) => Stock.FindAll((stock) => stock.item.Name == name);
     }
 }

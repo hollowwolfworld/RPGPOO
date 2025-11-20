@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EntityEngine.Inventories.Items
 {
-    public class Product : Item
+    public class Product
     {
+        public Item item {  get; private set; }
         /// <summary>
         /// Le prix auquel l'objet est vendu
         /// </summary>
@@ -15,8 +16,9 @@ namespace EntityEngine.Inventories.Items
         //public int Quantite { get; set; }
 
         //Création d'un article avec le nom de l'objet ainsi que sa description
-        private Product(string name, string description, decimal price) : base(name, description)
+        private Product(string name, string description, decimal price)
         {
+            item = new Item(name, description);
             Price = price;
         }
 

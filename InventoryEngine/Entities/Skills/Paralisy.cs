@@ -1,4 +1,5 @@
 ﻿using EntityEngine.Entities;
+using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,11 @@ namespace FightEngine.Skills
     {
         public void UseSkill(IEntity from, IEntity to)
         {
-            throw new NotImplementedException();
+            if (from is not IMagical mage) throw new NotAllowedToUseSkill();
+
+            mage.ManaPoint -= 5;
+
+            to.Status[Status.PARALYSED] = 2;
         }
     }
 }

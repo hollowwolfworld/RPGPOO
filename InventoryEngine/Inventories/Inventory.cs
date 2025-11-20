@@ -1,9 +1,12 @@
 ﻿using EntityEngine.Exceptions;
 using EntityEngine.Inventories.Items;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EntityEngine.Inventories
 {
-    public class Inventory
+    public class Inventory : IReadOnlyDictionary<Item, int>
     {
         /// <summary>
         /// Retourne le nombre d'item différent dans l'inventaire
@@ -14,7 +17,7 @@ namespace EntityEngine.Inventories
         /// The maximum number of the same type of item you can have in an inventory
         /// </summary>
         public int MaxSlotSize { get; private set; }
-        
+
         /// <summary>
         /// Nombre maximum d'item que le joueur peut mettre dans son inventaire
         /// </summary>
@@ -24,6 +27,22 @@ namespace EntityEngine.Inventories
         /// Une collection d'Item avec leur quantité
         /// </summary>
         private Dictionary<Item, int> Items { get; set; }
+
+        public IEnumerable<Item> Keys => ((IReadOnlyDictionary<Item, int>)Items).Keys;
+
+        public IEnumerable<int> Values => ((IReadOnlyDictionary<Item, int>)Items).Values;
+
+        public int Count => ((IReadOnlyCollection<KeyValuePair<Item, int>>)Items).Count;
+
+        public int this[Item key] 
+        { 
+            get 
+            {
+                var item = GetItemByName(key.Name);
+                if (item == null) return -1;
+                return Items[item];
+            } 
+        }
 
         /// <summary>
         /// Crée un inventaire avec un dictionnaire contenant déjà des items ainsi qu'une taille
@@ -63,7 +82,7 @@ namespace EntityEngine.Inventories
                 return;
             }
 
-            if (Items.Count == Size) throw new NotEnoughtPlace();
+            if (Items.Count == MaxSize) throw new NotEnoughtPlace();
 
             Items.Add(item, quantity);
         }
@@ -114,26 +133,39 @@ namespace EntityEngine.Inventories
         }
 
         /// <summary>
-        /// Récupère l'inventaire dans son entierter
-        /// </summary>
-        /// <returns>Les objets avec leur quantités</returns>
-        public Dictionary<Item, int> GetInventory()
-        {
-            return Items;
-        }
-
-        /// <summary>
         /// Récuper l'objet avec son nom
         /// </summary>
         /// <param name="name">Le nom de l'objet</param>
         /// <returns>Retourne null si l'objet n'est pas retrouvez sinon il retourne l'objet</returns>
-        private Item? GetItemByName(string name)
+        public Item? GetItemByName(string name)
         {
             foreach (var keyValuePair in Items)
             {
                 if (keyValuePair.Key.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) return keyValuePair.Key;
             }
             return null;
+        }
+
+        public bool ContainsKey(Item key)
+        {
+            return ((IReadOnlyDictionary<Item, int>)Items).ContainsKey(key);
+        }
+
+        public bool ContainsItem(string name) => Items.Select((item, index) => item.Key.Name == name).Count() >= 1;
+
+        public bool TryGetValue(Item key, [MaybeNullWhen(false)] out int value)
+        {
+            return ((IReadOnlyDictionary<Item, int>)Items).TryGetValue(key, out value);
+        }
+
+        public IEnumerator<KeyValuePair<Item, int>> GetEnumerator()
+        {
+            return ((IEnumerable<KeyValuePair<Item, int>>)Items).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)Items).GetEnumerator();
         }
     }
 }

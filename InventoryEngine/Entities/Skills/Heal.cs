@@ -1,5 +1,5 @@
 ﻿using EntityEngine.Entities;
-using EntityEngine.Entities.Players;
+using EntityEngine.Entities.Enemies;
 using EntityEngine.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace FightEngine.Skills
 {
-    public class SneakAttack : ISkill
+    public class Heal : ISkill
     {
+        
         public void UseSkill(IEntity from, IEntity to)
         {
-            if (from is not Thieft) throw new NotAllowedToUseSkill();
+            if (from is not IMagical magical) throw new NotAllowedToUseSkill();
 
-            int result = DamageCalculator.CalculateDamage(from.Attack, from.Luck, 0);
-
-            to.HealthPoint -= result;
+            from.HealthPoint += 10 + from.Levels / 2;
+            magical.ManaPoint -= 5;
         }
     }
 }
